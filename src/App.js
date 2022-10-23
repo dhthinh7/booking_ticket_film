@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Router } from "react-router-dom";
+import {createBrowserHistory} from "history";
+// React-slick
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+// Ant-design
+import 'antd/dist/antd.css';
+import HomeTemplate from "./templates/HomeTemplate";
+import Contact from "./templates/Layout/Contact/Contact";
+import News from "./templates/Layout/News/News";
+import Apply from "./templates/Layout/Apps/Apply";
+import Home from "./pages/Home/Home";
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Switch>
+        <HomeTemplate path="/" exact Component={Home} />;
+        <HomeTemplate path="/home" exact Component={Home} />;
+        <HomeTemplate path='/contact' exact Component={Contact}/>;
+        <HomeTemplate path='/news' exact Component={News}/>;
+        <HomeTemplate path='/apps' exact Component={Apply}/>;
+      </Switch>
+  )
 }
 
-export default App;

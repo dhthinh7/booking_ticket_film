@@ -1,0 +1,21 @@
+.bk-home-carousel {
+  .slick-slider {
+    .slick-dots {
+      & li.slick-active {
+        button::before {
+          width: 25px;
+        }
+      }
+      button {
+        &::before {
+          content: '';
+          width: 20px;
+          height: 5px;
+          border-radius: 3px;
+          background-color: red;
+          transition: all .5s;
+        }
+      }
+    }
+  }
+}

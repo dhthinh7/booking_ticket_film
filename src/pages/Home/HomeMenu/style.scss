@@ -1,0 +1,16 @@
+.bk-home-menu {
+  .bk-menu-btn {
+    button {
+      padding: 6px 12px;
+      font-size: 22px;
+      transition: all .3s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &.actived {
+        color: rgb(250, 82, 56)
+      }
+    }
+  }
+}
