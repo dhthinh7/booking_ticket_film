@@ -1,3 +1,5 @@
+@import './../../../style/mixin';
+
 .bk-home-carousel {
   .slick-slider {
     .slick-dots {
@@ -6,6 +8,7 @@
           width: 25px;
         }
       }
+
       button {
         &::before {
           content: '';
@@ -18,4 +21,36 @@
       }
     }
   }
+
+  @include arrow
+
+  // .slick-next, .slick-prev {
+  //   border: solid #d8d8d8;
+  //   border-width: 0 5px 5px 0;
+  //   font-size: 20px;
+  //   width: 35px;
+  //   height: 35px;
+  //   transition: all .3s;
+
+  //   padding: 3px;
+  //   display: block;
+  //   z-index: 10;
+
+  //   &:before {
+  //     content: '';
+  //   }
+  //   &:hover {
+  //     border-color: red;
+  //   }
+  // }
+
+  // .slick-next {
+  //   right: 78px;
+  //   transform: rotate(-45deg);
+  // }
+
+  // .slick-prev {
+  //   left: 78px;
+  //   transform: rotate(135deg);
+  // }
 }

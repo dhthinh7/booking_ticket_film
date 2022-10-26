@@ -6,8 +6,8 @@ import './style.scss';
 
 export default function HomeMenu() {
 
-  return <div className="bk-home-menu">
-    <div className="bk-menu-btn flex justify-center items-center">
+  return <div className="bk-home-menu my-10">
+    <div className="bk-menu-btn flex justify-center items-center mb-10">
       <button className="actived">Đang chiếu</button>
       <button>Sắp chiếu</button>
     </div>

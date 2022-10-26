@@ -1,5 +1,4 @@
-import { Switch, Router } from "react-router-dom";
-import {createBrowserHistory} from "history";
+import { Switch } from "react-router-dom";
 // React-slick
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";

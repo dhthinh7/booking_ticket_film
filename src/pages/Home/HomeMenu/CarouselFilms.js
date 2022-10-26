@@ -8,6 +8,8 @@ export default function CarouselFilms() {
     return (
       <div
         // className={`${className} ${styleSlick['slick-prev']}`}
+        className={className}
+
         style={{ ...style, display: "block" }}
         onClick={onClick}
       >
@@ -21,8 +23,9 @@ export default function CarouselFilms() {
     return (
       <div
         // className={`${className} ${styleSlick['slick-prev']}`}
+        className={className}
 
-        style={{ ...style, display: "block", left: '-50px' }}
+        style={{ ...style, display: "block", left: '50px' }}
         onClick={onClick}
       >
       </div>
@@ -31,8 +34,8 @@ export default function CarouselFilms() {
 
   const settings = {
     // // variableWidth: true,
-    // // nextArrow: <SampleNextArrow />,
-    // // prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     className: "center",
     centerMode: true,
     infinite: true,
@@ -47,7 +50,7 @@ export default function CarouselFilms() {
   const renderFilm = () => {
     let arrayFilms = []
     for (let index = 0; index < 12; index++) {
-      arrayFilms.push(<div className="bk-item">
+      arrayFilms.push(<div key={index} className="bk-item">
         <div className="bg-red-300 m-3 text-center">
           <h3 className="">{index}</h3>
         </div>
