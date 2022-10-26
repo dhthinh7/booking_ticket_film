@@ -1,6 +1,7 @@
-@mixin arrow {
+@mixin arrow($borderColor, $position) {
   .slick-next, .slick-prev {
-    border: solid #d8d8d8;
+    // border: solid #d8d8d8;
+    border: solid $borderColor;
     border-width: 0 5px 5px 0;
     font-size: 20px;
     width: 35px;
@@ -20,12 +21,12 @@
   }
 
   .slick-next {
-    right: 78px;
+    right: $position;
     transform: rotate(-45deg);
   }
 
   .slick-prev {
-    left: 78px;
+    left: $position;
     transform: rotate(135deg);
   }
 }
