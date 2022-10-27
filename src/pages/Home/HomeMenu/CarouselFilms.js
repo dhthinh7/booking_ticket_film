@@ -1,11 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
+import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
 
 export default function CarouselFilms() {
+  const dispatch = useDispatch();
   let { listFilms } = useSelector(state => state.FilmManageReducer)
-  console.log("listFilms", listFilms)
+
+  useEffect(()=>{
+    dispatch(getListFilmsAction());
+  }, [])
 
   const settings = {
     className: "center",
@@ -18,9 +23,8 @@ export default function CarouselFilms() {
     slidesPerRow: 4,
   };
 
-  // Temp render film 
   const renderFilm = () => {
-    return listFilms.map((item, index) => {
+    return listFilms?.map((item, index) => {
       return <div key={index}>
         <div className="bk-item">
           <div className="film-img" style={{ backgroundImage: `url(${item.hinhAnh})` }}>
@@ -45,7 +49,6 @@ export default function CarouselFilms() {
 
   return <div className="bk-carousel-menu container mx-auto w-4/6">
     <Slider {...settings}>
-      {/* {renderFilms()} */}
       {renderFilm()}
     </Slider>
   </div>;

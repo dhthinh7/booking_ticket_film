@@ -1,2 +1,5 @@
 // Film manage
 export const GET_LIST_BANNER = 'GET_LIST_BANNER';
+export const GET_LIST_FILMS = 'GET_LIST_FILMS';
+export const GET_INFOR_CINEMA = 'GET_INFOR_CINEMA';
+export const GET_LIST_CINEMA_DETAIL = 'GET_LIST_CINEMA_DETAIL';

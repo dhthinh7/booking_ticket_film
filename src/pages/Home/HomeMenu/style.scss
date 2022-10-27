@@ -31,8 +31,10 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        .bk-overload, .trailer {
-          background: linear-gradient(0deg,#000,transparent);
+
+        .bk-overload,
+        .trailer {
+          background: linear-gradient(0deg, #000, transparent);
           position: absolute;
           top: 0;
           left: 0;
@@ -41,8 +43,9 @@
           opacity: 0;
           transition: all .3s;
         }
-        
-        &:hover .bk-overload, &:hover .trailer {
+
+        &:hover .bk-overload,
+        &:hover .trailer {
           opacity: .3;
         }
 
@@ -56,12 +59,14 @@
           background: none;
           border-radius: 50%;
           transform: translate(-50%, -50%);
+
           svg {
             width: 3rem;
             height: 3rem;
             background-color: transparent;
             color: white;
           }
+
           &:hover {
             opacity: 1;
             cursor: pointer;
@@ -105,6 +110,7 @@
       &:hover .film-content .film-name {
         opacity: 0;
       }
+
       &:hover .film-content .film-button {
         opacity: 1;
       }
@@ -114,6 +120,38 @@
       .slick-track {
         .slick-slide>div {
           display: flex;
+        }
+      }
+    }
+  }
+
+  // Style for CinemaInfor
+  .bk-cinema {
+    border: 1px solid #ebebec;
+    max-height: $height-cinema;
+    border-radius: 4px;
+
+    .ant-tabs-tab {
+      padding-left: 0;
+    }
+
+    .ant-tabs-nav {
+      max-height: calc($height-cinema - $height-list-cinema-offset);
+    }
+    .bk-cinema-item {
+      .bk-cinema-infor {
+        .bk-cinema-name {
+          color: rgb(139, 197, 65);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .bk-cinema-address {
+          color: #949494;
+          overflow: hidden;
+          font-size: 12px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
     }
