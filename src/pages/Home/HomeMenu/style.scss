@@ -133,6 +133,14 @@
 
     .ant-tabs-tab {
       padding-left: 0;
+      opacity: 0.5;
+      transition: all .5s;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .ant-tabs-tab-active {
+      opacity: 1;
     }
 
     .ant-tabs-nav {
@@ -155,5 +163,9 @@
         }
       }
     }
+  }
+  .ant-tabs-content-holder {
+    max-height: calc($height-cinema - $height-list-cinema-offset - 20px);
+    overflow: hidden auto;
   }
 }
