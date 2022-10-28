@@ -1,8 +1,6 @@
-import { AppleOutlined, FacebookOutlined } from '@ant-design/icons'
 import _ from 'lodash'
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 export default function Footer(props) {
 
@@ -27,9 +25,7 @@ export default function Footer(props) {
           <div className="flex flex-col self-center text-sm text-center md:block lg:col-start-1 md:space-x-6">
             <span>©2021 All rights reserved</span>
           </div>
-
           <div className="">
-
           </div>
         </div>
       </div>

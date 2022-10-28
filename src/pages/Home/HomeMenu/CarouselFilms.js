@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
 import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
+import { history } from "../../..";
 
 export default function CarouselFilms() {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ export default function CarouselFilms() {
                 {item.tenPhim}
               </div>
             </div>
-            <button className="film-button">ĐẶT VÉ</button>
+            <button className="film-button" onClick={()=>{
+              history.push(`/detail/${item.maPhim}`)
+            }}>ĐẶT VÉ</button>
           </div>
         </div>
 

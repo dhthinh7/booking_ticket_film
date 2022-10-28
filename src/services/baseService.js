@@ -5,27 +5,27 @@ export class baseServices {
   get = (url) => Axios({
     url: `${DOMAIN}/${url}`,
     method: "GET",
-    headers: {'Authorization':'Bearer ' + localStorage.getItem(TOKEN)}
+    headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
   });
 
   post = (url, model) => Axios({
-    url: `${DOMAIN}${url}`,
+    url: `${DOMAIN}/${url}`,
     method: "POST",
-    model: model,
-    headers: {'Authorization':'Bearer ' + localStorage.getItem(TOKEN)}
+    data: model,
+    headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
   });
 
   put = (url, model) => Axios({
-    url: `${DOMAIN}${url}`,
+    url: `${DOMAIN}/${url}`,
     method: "PUT",
-    model: model,
-    headers: {'Authorization':'Bearer ' + localStorage.getItem(TOKEN)}
+    data: model,
+    headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
   });
 
   delete = (url, model) => Axios({
-    url: `${DOMAIN}${url}`,
+    url: `${DOMAIN}/${url}`,
     method: "DELETE",
-    model: model,
-    headers: {'Authorization':'Bearer ' + localStorage.getItem(TOKEN)}
+    data: model,
+    headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
   })
 }

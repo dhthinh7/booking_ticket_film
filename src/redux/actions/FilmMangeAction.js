@@ -10,7 +10,7 @@ export const getListBannersAction = () => {
         listBanner: listBanner.data.content
       })
     } catch (error) {
-      console.log("error", error)
+    
     }
   }
 }

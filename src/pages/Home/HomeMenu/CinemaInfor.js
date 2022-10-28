@@ -9,7 +9,6 @@ export default function CinemaInfor() {
 
   const dispacth = useDispatch()
   let { listCinemaDetail } = useSelector(state => state.CinemaReducer)
-  // console.log("listCinemaDetail", listCinemaDetail)
 
   useEffect(() => {
     dispacth(getShowTimeOfFilmAction)
@@ -54,7 +53,7 @@ export default function CinemaInfor() {
     })
   }
 
-  return <div className="bk-cinema mt-3 container px-5 py-5 mx-auto w-4/6">
+  return <div className="bk-cinema mt-3 container px-2 py-5 mx-auto w-4/6">
     <Tabs tabPosition="left">
       {renderCinemaDetail()}
     </Tabs>
