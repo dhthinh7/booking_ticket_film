@@ -15,6 +15,9 @@ export default function Detail(props) {
   useEffect(() => {
     dispatch(layThongTinLichChieuPhimAction(props.match.params.id))
   }, [])
+
+  window.scrollTo(0, 0);
+
   return <div style={{ backgroundImage: `url(${filmDetail.hinhAnh})`, backgroundSize: '100%', backgroundPosition: 'center', minHeight: '100vh' }}>
     <CustomCard
       style={{ paddingTop: 150, minHeight: '100vh', backgroundColor: '#0000005c' }}

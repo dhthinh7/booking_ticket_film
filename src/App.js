@@ -13,6 +13,7 @@ import Detail from "./pages/Detail/Detail";
 import { Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Checkout from "./pages/Checkout/Checkout";
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         <HomeTemplate path='/news' exact Component={News}/>;
         <HomeTemplate path='/apps' exact Component={Apply}/>;
         <HomeTemplate path='/detail/:id' exact Component={Detail}/>;
+        <Route path='/checkout/:id' exact component={Checkout}/>;
         <Route path='/login' exact component={Login}/>;
         <Route path='/register' exact component={Register}/>;
       </Switch>

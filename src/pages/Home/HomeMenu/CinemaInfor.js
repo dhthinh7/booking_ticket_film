@@ -11,7 +11,7 @@ export default function CinemaInfor() {
   let { listCinemaDetail } = useSelector(state => state.CinemaReducer)
 
   useEffect(() => {
-    dispacth(getShowTimeOfFilmAction)
+    dispacth(getShowTimeOfFilmAction())
   }, [])
 
   // Render cenema detail from API LayThongTinLichChieuHeThongRap
