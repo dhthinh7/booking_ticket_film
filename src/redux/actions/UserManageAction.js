@@ -7,7 +7,6 @@ export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
     try {
       let {data, status} = await userManageService.userLogin(userAccount);
-      console.log(data)
       if (status === STATUS_CODE.SUCCESS) {
         localStorage.setItem(USER_LOGIN, JSON.stringify(data.content))
         localStorage.setItem(TOKEN, data.content.accessToken)

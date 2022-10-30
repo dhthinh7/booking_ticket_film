@@ -19,7 +19,6 @@ export const getShowTimeOfFilmAction = () => {
 }
 
 export const layThongTinLichChieuPhimAction = (filmId) => {
-  console.log("film ID", filmId)
   return async (dispatch) => {
     try {
       let { data, status } = await cinemaService.layThongTinLichChieuPhim(filmId);

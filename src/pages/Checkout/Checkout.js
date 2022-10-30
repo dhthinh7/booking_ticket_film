@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import history from '../../App'
 import { TOKEN, USER_LOGIN } from "../../utils/config";
 import './Style.scss';
-import { datVeAction, layDanhSachPhongVeAction } from "../../redux/actions/BookingTicketActions";
-import { BOOKING_TICKET } from "../../redux/types/Type";
+import { datGheAction, datVeAction, layDanhSachPhongVeAction } from "../../redux/actions/BookingTicketActions";
+import { BOOKING_TICKET, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
+import { connection } from "../..";
 
 const { TabPane } = Tabs
 
@@ -16,7 +17,7 @@ export default function Checkout(props) {
 
   const dispatch = useDispatch();
   let { userLogin } = useSelector(state => state.UserManageReducer);
-  let { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.BookingTicketReducer);
+  let { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.BookingTicketReducer);
 
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function Checkout(props) {
   return <div className="m-5 relative">
     <Tabs defaultActiveKey="1">
       <TabPane tab="01 CHỌN GHẾ & THANH TOÁN" key="1" >
-        <BookingTicket {...props} chiTietPhongVe={chiTietPhongVe} userLogin={userLogin} danhSachGheDangDat={danhSachGheDangDat} />
+        <BookingTicket {...props} chiTietPhongVe={chiTietPhongVe} userLogin={userLogin} danhSachGheDangDat={danhSachGheDangDat} danhSachGheKhachDat={danhSachGheKhachDat} />
       </TabPane>
       <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
         02 KẾT QUẢ ĐẶT VÉ
@@ -62,9 +63,51 @@ export default function Checkout(props) {
 const BookingTicket = (props) => {
   const dispatch = useDispatch();
   const { danhSachGhe, thongTinPhim } = props.chiTietPhongVe;
-  const { danhSachGheDangDat } = props
+  const { danhSachGheDangDat, danhSachGheKhachDat } = props
   const { userLogin } = props;
-  console.log("chiTietPhongVe children", props.chiTietPhongVe)
+
+  useEffect(() => {
+    //Vừa vào trang load tất cả ghế của các người khác đang đặt
+    connection.invoke('loadDanhSachGhe', props.match.params.id);
+
+    // Có 1 client nào thực hiện việc đặt vé thành công mình sẽ load lại danh sách phòng vé của lịch chiếu đó
+    connection.on('datVeThanhCong', () => {
+      dispatch(layDanhSachPhongVeAction(props.match.params.id));
+    })
+
+    connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
+      //Bước 1: Loại mình ra khỏi danh sách
+      dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
+
+      //Bước 2: Gộp danh sách ghế khách đặt ở tất cả user thành 1 mảng chung 
+      let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
+        let arrGhe = JSON.parse(item.danhSachGhe);
+
+        return [...result, ...arrGhe];
+      }, []);
+
+      // Đưa dữ liệu ghế khách đặt cập nhật redux
+      arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe');
+
+      // Đưa dữ liệu ghế khách đặt về redux
+      dispatch({
+        type: GET_SEAT_OTHER_USER,
+        arrGheKhachDat
+      })
+    })
+
+    // Cài đặt sự kiện khi reload trang
+    window.addEventListener("beforeunload", clearGhe);
+
+    return () => {
+      // clearGhe();
+      window.removeEventListener('beforeunload', clearGhe);
+    }
+  }, [])
+
+  const clearGhe = function (event) {
+    connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id);
+  }
 
   const renderSeats = () => {
     return danhSachGhe?.map((ghe, index) => {
@@ -77,10 +120,11 @@ const BookingTicket = (props) => {
       let indexGheDD = danhSachGheDangDat?.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
 
       //Kiểm tra từng render xem có phải ghế khách đặt hay không
-      // let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
-      // if (indexGheKD !== -1) {
-      //   classGheKhachDat = 'gheKhachDat';
-      // }
+      let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
+      if (indexGheKD !== -1) {
+        classGheKhachDat = 'gheKhachDat';
+      }
+
       if (userLogin?.taiKhoan === ghe.taiKhoanNguoiDat) {
         classGheDaDuocDat = 'gheDaDuocDat';
       }
@@ -91,12 +135,7 @@ const BookingTicket = (props) => {
 
       return <Fragment key={index}>
         <button onClick={() => {
-          // const action = datGheAction(ghe, props.match.params.id);
-          dispatch({
-            type: BOOKING_TICKET,
-            gheDuocChon: ghe
-          });
-
+          dispatch(datGheAction(ghe, props.match.params.id));
         }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
           {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : <CloseOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : classGheKhachDat !== '' ? <SmileOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : ghe.stt}
         </button>
