@@ -42,10 +42,10 @@ export default function Header() {
             <div className="tracking-wider font-medium">Hello <span className="text-green-500">{userLogin.hoTen}</span>!</div>
             <span className="mx-2">|</span>
             <div className="register">
-              <div className="hover:text-red-500 hover:duration-300 tracking-wider hover:cursor-pointer font-medium" onClick={Logout}>Đăng xuất</div>
+              <div className="hover:text-red-500 hover:duration-300 tracking-wider hover:cursor-pointer font-medium focus:outline-none" onClick={Logout}>Đăng xuất</div>
             </div>
           </div> : <div className="login flex items-center">
-            <div className="tracking-wider hover:cursor-pointer font-medium hover:text-red-500 hover:duration-300" onClick={() => {
+            <div className="tracking-wider hover:cursor-pointer font-medium hover:text-red-500 hover:duration-300 focus:outline-none" onClick={() => {
               history.push('/login')
             }}>Đăng nhập</div>
             <span className="mx-2">|</span>
