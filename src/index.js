@@ -29,7 +29,7 @@ connection.start().then(()=>{
     // document.getElementById('root')
   );
 }).catch(error => {
-  console.log("error socket", error);
+  // console.log("error socket", error);
 })
 
 // If you want to start measuring performance in your app, pass a function

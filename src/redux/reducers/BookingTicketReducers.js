@@ -1,10 +1,10 @@
-import { BOOKING_ACTION, BOOKING_TICKET, GET_SEAT_OTHER_USER, GET_TICKET_ROOM } from "../types/Type";
+import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER, GET_TICKET_ROOM } from "../types/Type";
 
 const initialState = {
   chiTietPhongVe: {},
   danhSachGheDangDat: [], // list of seats that current user ongoing
-  danhSachGheKhachDat: []
-  
+  danhSachGheKhachDat: [],
+  tabActive: '1'
 }
 
 export const BookingTicketReducer = (state = initialState, action) => {
@@ -22,8 +22,9 @@ export const BookingTicketReducer = (state = initialState, action) => {
     case BOOKING_ACTION:
       return {...state, danhSachGheDangDat: []};
     case GET_SEAT_OTHER_USER:
-      return { ...state, danhSachGheKhachDat: action.arrGheKhachDat}
-
+      return { ...state, danhSachGheKhachDat: action.arrGheKhachDat};
+    case CHANGE_TAB_ACTIVE:
+      return { ...state, tabActive: action.number}
     default:
       return { ...state };
   }

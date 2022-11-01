@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShowTimeOfFilmAction } from "../../../redux/actions/CinemaAction";
 import moment from 'moment';
+import { NavLink } from "react-router-dom";
 const { TabPane } = Tabs;
 
 export default function CinemaInfor() {
@@ -40,7 +41,9 @@ export default function CinemaInfor() {
                   <div className="show-time row max-w-full mx-0">
                     {filmItem.lstLichChieuTheoPhim.splice(0, 10).map((showTimeItem, index) => {
                       return <div key={index} className="show-timeItem col-3 p-0 ">
-                        <div className="m-1 py-1 px-1 text-green-600 cursor-pointer bg-gray-200 text-center rounded hover:text-red-500 hover:duration-300">{moment(showTimeItem.ngayChieuGioChieu).format("hh:mm:A")}</div>
+                        <div className="m-1 py-1 px-1 bg-gray-200 text-center rounded hover:text-red-500 hover:duration-300">
+                          <NavLink className="text-green-600" to={`/checkout/${showTimeItem.maLichChieu}`}>{moment(showTimeItem.ngayChieuGioChieu).format("hh:mm:A")}</NavLink>
+                        </div>
                       </div>
                     })}
                   </div>

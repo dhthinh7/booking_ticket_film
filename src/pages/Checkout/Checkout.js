@@ -8,8 +8,10 @@ import history from '../../App'
 import { TOKEN, USER_LOGIN } from "../../utils/config";
 import './Style.scss';
 import { datGheAction, datVeAction, layDanhSachPhongVeAction } from "../../redux/actions/BookingTicketActions";
-import { BOOKING_TICKET, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
+import { BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
 import { connection } from "../..";
+import { accountInformationAction } from "../../redux/actions/UserManageAction";
+import moment from 'moment';
 
 const { TabPane } = Tabs
 
@@ -17,11 +19,11 @@ export default function Checkout(props) {
 
   const dispatch = useDispatch();
   let { userLogin } = useSelector(state => state.UserManageReducer);
-  let { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.BookingTicketReducer);
-
+  let { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat, tabActive } = useSelector(state => state.BookingTicketReducer);
 
   useEffect(() => {
-    dispatch(layDanhSachPhongVeAction(props.match.params.id));
+    window.scrollTo(0, 0);
+    dispatch(layDanhSachPhongVeAction(props.match.params.id, true));
   }, [])
 
   const operations = <Fragment>
@@ -46,12 +48,20 @@ export default function Checkout(props) {
   </Fragment>
 
   return <div className="m-5 relative">
-    <Tabs defaultActiveKey="1">
+    <Tabs defaultActiveKey="1" activeKey={tabActive} onChange={(key) => {
+      dispatch({
+        type: CHANGE_TAB_ACTIVE,
+        number: key.toString()
+      })
+    }}>
+      <TabPane tab={<div className="text-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <NavLink to="/"><HomeOutlined style={{ marginLeft: 10, fontSize: 25 }} /></NavLink></div>} key="3">
+      </TabPane>
       <TabPane tab="01 CHỌN GHẾ & THANH TOÁN" key="1" >
         <BookingTicket {...props} chiTietPhongVe={chiTietPhongVe} userLogin={userLogin} danhSachGheDangDat={danhSachGheDangDat} danhSachGheKhachDat={danhSachGheKhachDat} />
       </TabPane>
       <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
-        02 KẾT QUẢ ĐẶT VÉ
+        <HistoryBooking {...props} />
       </TabPane>
     </Tabs>
     <div className="absolute right-0 top-0">
@@ -72,7 +82,7 @@ const BookingTicket = (props) => {
 
     // Có 1 client nào thực hiện việc đặt vé thành công mình sẽ load lại danh sách phòng vé của lịch chiếu đó
     connection.on('datVeThanhCong', () => {
-      dispatch(layDanhSachPhongVeAction(props.match.params.id));
+      dispatch(layDanhSachPhongVeAction(props.match.params.id, false));
     })
 
     connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
@@ -235,4 +245,45 @@ const BookingTicket = (props) => {
       </div>
     </div>
   </div>
+}
+
+const HistoryBooking = (props) => {
+  let { accountInformation } = useSelector(state => state.UserManageReducer);
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(accountInformationAction())
+  }, []);
+
+  const renderTicketItem = () => {
+    return accountInformation.thongTinDatVe?.map((thongTinDatVeItem, index) => {
+      const seats = _.first(thongTinDatVeItem.danhSachGhe);
+
+      return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
+        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={thongTinDatVeItem.hinhAnh} />
+          <div className="flex-grow">
+            <h2 className="text-pink-500 title-font font-medium text-2xl">{thongTinDatVeItem.tenPhim}</h2>
+            <p className="text-gray-500"><span className="font-bold">Giờ chiếu:</span> {moment(thongTinDatVeItem.ngayDat).format('hh:mm A')} - <span className="font-bold">Ngày chiếu:</span>{moment(thongTinDatVeItem.ngayDat).format('DD-MM-YYYY')} .</p>
+            <p><span className="font-bold">Địa điểm: </span>{seats.tenHeThongRap}  </p>
+            <p>
+              <span className="font-bold">Tên rạp: </span>{seats.tenCumRap} - <span className="font-bold">Ghế:</span>  {thongTinDatVeItem.danhSachGhe.map((ghe, index) => { return <span className="text-green-500 text-xl" key={index}> [ {ghe.tenGhe} ] </span> })}
+            </p>
+          </div>
+        </div>
+      </div>
+    })
+  }
+
+  return <section className="text-gray-600 body-font">
+  <div className="container px-5 py-3 mx-auto">
+    <div className="flex flex-col text-center w-full mb-5">
+      <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4  text-purple-600 ">Lịch sử đặt vé khách hàng</h1>
+      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Hãy xem thông tin địa và thời gian để xem phim vui vẻ bạn nhé !</p>
+    </div>
+    <div className="flex flex-wrap -m-2">
+      {renderTicketItem()}
+    </div>
+  </div>
+</section>
 }

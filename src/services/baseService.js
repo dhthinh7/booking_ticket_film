@@ -8,7 +8,7 @@ export class baseServices {
     headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
   });
 
-  post = (url, model) => Axios({
+  post = (url, model = '') => Axios({
     url: `${DOMAIN}/${url}`,
     method: "POST",
     data: model,

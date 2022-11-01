@@ -1,6 +1,6 @@
 import { cinemaService } from "../../services/CinemaService"
 import { STATUS_CODE } from "../../utils/config";
-import { GET_FILM_DETAIL, GET_INFOR_CINEMA, GET_LIST_CINEMA_DETAIL } from "../types/Type";
+import { GET_FILM_DETAIL, GET_INFOR_CINEMA, GET_LIST_CINEMA_DETAIL, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
 
 export const getShowTimeOfFilmAction = () => {
   return async (dispatch) => {
@@ -20,6 +20,10 @@ export const getShowTimeOfFilmAction = () => {
 
 export const layThongTinLichChieuPhimAction = (filmId) => {
   return async (dispatch) => {
+    await dispatch({
+      type: SHOW_LOADING
+    })
+
     try {
       let { data, status } = await cinemaService.layThongTinLichChieuPhim(filmId);
       
@@ -32,5 +36,8 @@ export const layThongTinLichChieuPhimAction = (filmId) => {
     } catch (error) {
 
     }
+    await dispatch({
+      type: HIDE_LOADING
+    })
   }
 }

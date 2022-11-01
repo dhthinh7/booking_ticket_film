@@ -1,34 +1,51 @@
-import { connection } from "../..";
+import { connection, history } from "../..";
 import { bookingTicketServices } from "../../services/BookingTicketServices"
 import { STATUS_CODE } from "../../utils/config";
-import { BOOKING_ACTION, BOOKING_TICKET, GET_TICKET_ROOM } from "../types/Type";
+import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_TICKET_ROOM, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
 
-export const layDanhSachPhongVeAction = (maLichChieu) => {
+export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
   return async (dispatch) => {
+
+    isLoading && await dispatch({
+      type: SHOW_LOADING
+    })
+
     try {
       let { data, status } = await bookingTicketServices.layDanhSachPhongVe(maLichChieu);
       if (status === STATUS_CODE.SUCCESS) {
-        dispatch({
+        await dispatch({
           type: GET_TICKET_ROOM,
           chiTietPhongVe: data.content
         })
+        await dispatch({
+          type: CHANGE_TAB_ACTIVE,
+          number: '1'
+        })
       }
     } catch (error) {
-
+      
     }
+
+    isLoading && await dispatch({
+      type: HIDE_LOADING
+    })
   }
 }
 
 export const datVeAction = (danhSachVe) => {
   return async (dispatch) => {
     try {
-      let { data, status } = await bookingTicketServices.datVe(danhSachVe);
+      let { status } = await bookingTicketServices.datVe(danhSachVe);
       if (status === STATUS_CODE.SUCCESS) {
-        await dispatch(layDanhSachPhongVeAction(danhSachVe.maLichChieu))
+        await dispatch(layDanhSachPhongVeAction(danhSachVe.maLichChieu, true))
         await dispatch({ type: BOOKING_ACTION })
+        await dispatch({
+          type: CHANGE_TAB_ACTIVE,
+          number: '2'
+        })
       }
     } catch (error) {
-
+      alert('Không thể đặt vé')
     }
   }
 }

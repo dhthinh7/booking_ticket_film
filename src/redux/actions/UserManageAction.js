@@ -1,7 +1,7 @@
 import { history } from "../..";
 import { userManageService } from "../../services/UserManageService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/config";
-import { LOGIN_ACTION } from "../types/Type";
+import { GET_ACCOUNT_INFORMATION, LOGIN_ACTION } from "../types/Type";
 
 export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
@@ -18,6 +18,20 @@ export const userLoginAction = (userAccount) => {
       }
     } catch (error) {
 
+    }
+  }
+}
+
+export const accountInformationAction  = () => {
+  return async (dispatch) => {
+    try {
+      let {data, status} = await userManageService.accountInformation();
+      dispatch({
+        type: GET_ACCOUNT_INFORMATION,
+        accountInformation: data.content
+      })
+    } catch (error) {
+      
     }
   }
 }

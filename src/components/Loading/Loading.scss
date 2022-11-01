@@ -1,0 +1,58 @@
+.wave-loading-bg {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wave-loading {
+    width: 80px;
+    height: 80px;
+    clear: both;
+    
+    &::before, &::after {
+      content: "";
+      border: 4px solid rgb(244, 9, 9);
+      width:  80px;;
+      height:  80px;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    &::after {
+      transform: scale(0, 0);
+      opacity: 0;
+      animation: waveAfter .6s infinite linear;
+    }
+    &::before {
+      transform: scale(1, 1);
+      opacity: 1;
+      animation: waveBefore .6s infinite linear;
+    }
+  }
+}
+
+@keyframes waveAfter {
+  from {
+    transform: scale(.5, .5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+@keyframes waveBefore {
+  from {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5, 1.5);
+    opacity: 0;
+  }
+}
