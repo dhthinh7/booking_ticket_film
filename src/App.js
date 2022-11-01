@@ -15,6 +15,8 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Checkout from "./pages/Checkout/Checkout";
 import Loading from "./components/Loading/Loading";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import Dashboard from "./templates/AdminTemplate/Dashboard/Dashboard";
 
 
 export default function App() {
@@ -31,6 +33,7 @@ export default function App() {
         <Route path='/checkout/:id' exact component={Checkout} />;
         <Route path='/login' exact component={Login} />;
         <Route path='/register' exact component={Register} />;
+        <AdminTemplate path='/admin' exact Component={Dashboard}/>;
       </Switch>
     </div>
   )

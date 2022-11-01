@@ -12,6 +12,7 @@ import { BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER } from "../../re
 import { connection } from "../..";
 import { accountInformationAction } from "../../redux/actions/UserManageAction";
 import moment from 'moment';
+import AccountDisplay from "../../components/AccountDisplay/AccountDisplay";
 
 const { TabPane } = Tabs
 
@@ -25,27 +26,6 @@ export default function Checkout(props) {
     window.scrollTo(0, 0);
     dispatch(layDanhSachPhongVeAction(props.match.params.id, true));
   }, [])
-
-  const operations = <Fragment>
-    {!_.isEmpty(userLogin) ?
-      <div className="flex justify-center items-center">
-        <button className="flex justify-center items-center focus: outline-none" onClick={() => {
-          history.push('/')
-        }}>
-          <div style={{ width: 40, height: 40 }} className="text-2xl mr-1 rounded-full bg-red-200 leading-8">
-            {userLogin.taiKhoan.substr(0, 1)}
-          </div>
-          <div className="font-medium text-green-500">Hello ! {userLogin.taiKhoan}</div>
-        </button>
-        <span className="mx-2">|</span>
-        <button onClick={() => {
-          localStorage.removeItem(USER_LOGIN);
-          localStorage.removeItem(TOKEN);
-          history.push('/home');
-          window.location.reload();
-        }} className="text-blue-800 font-medium">Đăng xuất</button>
-      </div> : ''}
-  </Fragment>
 
   return <div className="m-5 relative">
     <Tabs defaultActiveKey="1" activeKey={tabActive} onChange={(key) => {
@@ -65,7 +45,7 @@ export default function Checkout(props) {
       </TabPane>
     </Tabs>
     <div className="absolute right-0 top-0">
-      {operations}
+      <AccountDisplay />
     </div>
   </div>
 }
