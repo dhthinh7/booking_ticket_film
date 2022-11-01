@@ -1,9 +1,13 @@
+@import '../../../style/mixin';
+@import '../../../style/variable';
+
 .bk-home-menu {
   .bk-menu-btn {
     button {
       padding: 6px 12px;
       font-size: 22px;
       transition: all .3s ease-in-out;
+
       &:hover {
         transform: scale(1.1);
       }
@@ -12,5 +16,156 @@
         color: rgb(250, 82, 56)
       }
     }
+  }
+
+  @include arrow($arrow-gray, -80px);
+
+  .bk-carousel-menu {
+    .bk-item {
+      position: relative;
+      width: 95%;
+
+      .film-img {
+        padding-top: 147.9%;
+        border-radius: 4px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        .bk-overload,
+        .trailer {
+          background: linear-gradient(0deg, #000, transparent);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: all .3s;
+        }
+
+        &:hover .bk-overload,
+        &:hover .trailer {
+          opacity: .3;
+        }
+
+        .trailer {
+          opacity: 0;
+          z-index: 10;
+          width: 50px;
+          height: 50px;
+          top: 50%;
+          left: 50%;
+          background: none;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+
+          svg {
+            width: 3rem;
+            height: 3rem;
+            background-color: transparent;
+            color: white;
+          }
+
+          &:hover {
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .film-img:nth-child(1) {
+        margin-bottom: 80px;
+      }
+
+      .film-content {
+
+        .film-name,
+        .film-button {
+          position: absolute;
+          top: 102%;
+          transition: all .3s;
+        }
+
+        .film-name {
+          opacity: 1;
+          font-weight: 700;
+          letter-spacing: 1px;
+          line-height: 22px;
+        }
+
+        .film-button {
+          opacity: 0;
+          border-radius: 4px;
+          color: white;
+          font-size: 20px;
+          padding: 10px;
+          text-align: center;
+          font-weight: 600;
+          background: rgb(251, 66, 38);
+          width: 100%;
+        }
+      }
+
+      &:hover .film-content .film-name {
+        opacity: 0;
+      }
+
+      &:hover .film-content .film-button {
+        opacity: 1;
+      }
+    }
+
+    .slick-list {
+      .slick-track {
+        .slick-slide>div {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  // Style for CinemaInfor
+  .bk-cinema {
+    border: 1px solid #ebebec;
+    max-height: $height-cinema;
+    border-radius: 4px;
+
+    .ant-tabs-tab {
+      padding-left: 0;
+      opacity: 0.5;
+      transition: all .5s;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .ant-tabs-tab-active {
+      opacity: 1;
+    }
+
+    .ant-tabs-nav {
+      max-height: calc($height-cinema - $height-list-cinema-offset);
+    }
+    .bk-cinema-item {
+      .bk-cinema-infor {
+        .bk-cinema-name {
+          color: rgb(139, 197, 65);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .bk-cinema-address {
+          color: #949494;
+          overflow: hidden;
+          font-size: 12px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .ant-tabs-content-holder {
+    max-height: calc($height-cinema - $height-list-cinema-offset - 20px);
+    overflow: hidden auto;
   }
 }

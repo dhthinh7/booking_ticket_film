@@ -1,52 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
+import { getListBannersAction } from "../../../redux/actions/FilmMangeAction";
 import './style.scss';
 
 export default function HomeCarousel() {
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "none"}}
-        onClick={onClick}
-      />
-    );
-  }
-  
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "none"}}
-        onClick={onClick}
-      />
-    );
-  }
+  const dispatch = useDispatch();
+  const { listBanner } = useSelector(state => state.FilmManageReducer)
+
+  useEffect(() => {
+    dispatch(getListBannersAction());
+  }, [])
+
   const settings = {
-    // centerMode: true,  
+    centerMode: true,
     infinite: true,
-    // centerPadding: "60px",
+    centerPadding: "60px",
     slidesToShow: 1,
     speed: 500,
-    // variableWidth: true,
     dots: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
   };
 
-  return <div className="bk-home-carousel h-96 w-full mx-auto bg-slate-200">
-      <Slider {...settings}>
-        <div className="!flex justify-center">
-          <img src="https://picsum.photos/300" alt="" />
+  const contentStyle = {
+    height: '600px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    backgroundPosition: 'center',
+    backgroundSize: '100%',
+    backgroundRepeat: 'no-repeat',
+
+  };
+
+  const renderBanner = () => {
+    return listBanner?.map((item, index) => {
+      return <div key={index}>
+        <div style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})`}} className="mx-1">
         </div>
-        <div className="!flex justify-center">
-          <img src="https://picsum.photos/300" alt="" />
-        </div>
-        <div className="!flex justify-center">
-          <img src="https://picsum.photos/300" alt="" />
-        </div>
-      </Slider>
+
+      </div>
+    })
+  }
+
+  return <div className="bk-home-carousel w-full mx-auto bg-slate-200">
+    <Slider {...settings}>
+      {renderBanner()}
+    </Slider>
   </div>
 }
