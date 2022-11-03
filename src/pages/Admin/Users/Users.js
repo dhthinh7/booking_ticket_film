@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
 import { deleteUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
+import { GET_ACCOUNT_USER_DETAIL } from '../../../redux/types/Type';
 const { Search } = Input;
 
 export default function Films() {
@@ -68,10 +69,15 @@ export default function Films() {
       title: 'Hành động',
       render: (text, record) => {
         return <Fragment>
-          {/* Edit film */}
-          <NavLink key={1} className=" mr-2  text-2xl" to={`/admin/users/edit/1`}><EditOutlined style={{ color: 'blue' }} /></NavLink>
+          {/* Edit user */}
+          <NavLink key={1} className=" mr-2  text-2xl" to={`/admin/users/edit`}><EditOutlined style={{ color: 'blue' }} onClick={()=>{
+            dispatch({
+              type: GET_ACCOUNT_USER_DETAIL,
+              accountUser: record
+            })
+          }}/></NavLink>
 
-          {/* Delete film */}
+          {/* Delete user */}
           <span style={{ cursor: 'pointer' }} key={2} className="text-2xl" onClick={() => {
             if (window.confirm('Bạn có chắc muốn xoá tài khoản ' + record.taiKhoan)) {
               dispatch(deleteUserAction(record.taiKhoan, searchText))
@@ -85,7 +91,7 @@ export default function Films() {
   ];
 
   function onChange(pagination, filters, sorter, extra) {
-    console.log('params', pagination, filters, sorter, extra);
+    // console.log('params', pagination, filters, sorter, extra);
   }
   
   const onSearchChange = (e) => {

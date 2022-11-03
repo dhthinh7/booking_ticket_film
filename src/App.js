@@ -17,7 +17,6 @@ import Register from "./pages/Register/Register";
 import Checkout from "./pages/Checkout/Checkout";
 import Loading from "./components/Loading/Loading";
 import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
-import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import Films from "./pages/Admin/Films/Films";
 import EditFilm from "./pages/Admin/EditFilm/EditFilm";
 import ShowTime from "./pages/Admin/ShowTime/ShowTime";
@@ -39,13 +38,13 @@ export default function App() {
         <HomeTemplate path='/news' exact Component={News} />;
         <HomeTemplate path='/apps' exact Component={Apply} />;
         <HomeTemplate path='/detail/:id' exact Component={Detail} />;
-        <AdminTemplate path='/admin' exact Component={Dashboard}/>;
+        <AdminTemplate path='/admin' exact Component={Users}/>;
         <AdminTemplate path='/admin/films' exact Component={Films}/>;
         <AdminTemplate path='/admin/films/edit/:id' exact Component={EditFilm}/>;
         <AdminTemplate path='/admin/films/showtime/:id/:name' exact Component={ShowTime}/>;
         <AdminTemplate path='/admin/films/addnew' exact Component={AddFilm}/>;
         <AdminTemplate path='/admin/users' exact Component={Users}/>;
-        <AdminTemplate path='/admin/users/edit/:id' exact Component={UserEdit}/>;
+        <AdminTemplate path='/admin/users/edit' exact Component={UserEdit}/>;
       </Switch>
     </div>
   )
