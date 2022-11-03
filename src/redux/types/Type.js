@@ -1,5 +1,6 @@
 // User
 export const LOGIN_ACTION = 'LOGIN_ACTION';
+export const GET_LIST_USERS = 'GET_LIST_USERS';
 
 // Loading
 export const SHOW_LOADING = 'SHOW_LOADING';

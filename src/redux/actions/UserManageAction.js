@@ -2,7 +2,7 @@ import { history } from "../..";
 import { userManageService } from "../../services/UserManageService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
-import { GET_ACCOUNT_INFORMATION, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
+import { GET_ACCOUNT_INFORMATION, GET_LIST_USERS, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
 
 export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
@@ -52,5 +52,21 @@ export const userRegisterAction = (userRegister) => {
       Notification('error', 'Đăng ký không thành công', error.response.data.content);
     }
     setTimeout(() => { dispatch({ type: HIDE_LOADING }) }, 300)
+  }
+}
+
+export const getListUserAction = (keyWord = '') => {
+  return async (dispatch) => {
+    try {
+      let { data, status } = await userManageService.getListUser(keyWord);
+      if (status === STATUS_CODE.SUCCESS) {
+        dispatch({
+          type: GET_LIST_USERS,
+          listUsers: data.content
+        })
+      }
+    } catch (error) {
+      
+    }
   }
 }
