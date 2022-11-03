@@ -1,6 +1,8 @@
 import { connection, history } from "../..";
 import { bookingTicketServices } from "../../services/BookingTicketServices"
 import { STATUS_CODE } from "../../utils/config";
+import { Notification } from "../../utils/Notification";
+
 import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_TICKET_ROOM, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
 
 export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
@@ -68,5 +70,19 @@ export const datGheAction = (ghe, maLichChieu) => {
 
     // Call api signalR to inform to server update status of seat
     connection.invoke('datGhe', taiKhoan, danhSachGheDangDat, maLichChieu);
+  }
+}
+
+export const taoLichChieuAction = (lichChieu) => {
+  return async (dispatch) => {
+    dispatch({type: SHOW_LOADING});
+    try {
+      let { data, status } = await bookingTicketServices.taoLichChieu(lichChieu);
+      Notification('success', data.content)
+      history.push('/admin/films');
+    } catch (error) {
+      Notification('error', 'Tạo lịch chiếu không thành công', error.response.data.content);
+    }
+    setTimeout(() => dispatch({type: HIDE_LOADING}), 300)
   }
 }

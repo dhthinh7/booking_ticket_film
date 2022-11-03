@@ -9,7 +9,7 @@ export default function AccountDisplay() {
   return <div>
     {!_.isEmpty(userLogin) ?
       <div className="flex justify-center items-center">
-        <button className="flex justify-center items-center focus: outline-none" onClick={() => {
+        <button className="flex justify-center items-center focus:outline-none" onClick={() => {
           history.push('/')
         }}>
           <div style={{ width: 40, height: 40 }} className="text-2xl mr-1 rounded-full bg-red-200 leading-8">

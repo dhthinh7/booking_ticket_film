@@ -8,6 +8,7 @@ import { TOKEN, USER_LOGIN } from "../../../utils/config";
 
 export default function Header() {
   let { userLogin } = useSelector(state => state.UserManageReducer);
+  
   const Logout = () => {
     localStorage.removeItem(USER_LOGIN);
     localStorage.removeItem(TOKEN);
@@ -33,6 +34,10 @@ export default function Header() {
           <li className="flex">
             <NavLink to="/apps" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-black font-medium" activeClassName="border-b-2 border-white">Ứng dụng</NavLink>
           </li>
+          {userLogin.maLoaiNguoiDung === "QuanTri" ? 
+          <li className="flex">
+            <NavLink to="/admin" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-black font-medium" activeClassName="border-b-2 border-white">Admin Home</NavLink>
+          </li> : ''}
         </ul>
         <div className="bk-user flex items-center justify-center">
           {!(_.isEmpty(userLogin)) ? <div className="login flex items-center">

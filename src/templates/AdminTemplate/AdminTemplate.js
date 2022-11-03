@@ -28,7 +28,6 @@ const AdminTemplate = (props) => { //path, exact, Component
   const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = collapsed => {
-    // console.log(collapsed);
     setCollapsed(collapsed);
   };
 
@@ -52,7 +51,7 @@ const AdminTemplate = (props) => { //path, exact, Component
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <div className="logo mt-3 ml-4 w-9">
-            <img className="" src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="..." />
+            <img className="" src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="logo" />
           </div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<UserOutlined />}>

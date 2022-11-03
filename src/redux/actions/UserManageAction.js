@@ -1,12 +1,14 @@
 import { history } from "../..";
 import { userManageService } from "../../services/UserManageService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/config";
-import { GET_ACCOUNT_INFORMATION, LOGIN_ACTION } from "../types/Type";
+import { Notification } from "../../utils/Notification";
+import { GET_ACCOUNT_INFORMATION, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
 
 export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
+    dispatch({ type: SHOW_LOADING })
     try {
-      let {data, status} = await userManageService.userLogin(userAccount);
+      let { data, status } = await userManageService.userLogin(userAccount);
       if (status === STATUS_CODE.SUCCESS) {
         localStorage.setItem(USER_LOGIN, JSON.stringify(data.content))
         localStorage.setItem(TOKEN, data.content.accessToken)
@@ -19,19 +21,36 @@ export const userLoginAction = (userAccount) => {
     } catch (error) {
 
     }
+    setTimeout(() => {
+      dispatch({ type: HIDE_LOADING });
+    }, 300);
   }
 }
 
-export const accountInformationAction  = () => {
+export const accountInformationAction = () => {
   return async (dispatch) => {
     try {
-      let {data, status} = await userManageService.accountInformation();
+      let { data } = await userManageService.accountInformation();
       dispatch({
         type: GET_ACCOUNT_INFORMATION,
         accountInformation: data.content
       })
     } catch (error) {
-      
+
     }
+  }
+}
+
+export const userRegisterAction = (userRegister) => {
+  return async (dispatch) => {
+    dispatch({ type: SHOW_LOADING });
+    try {
+      await userManageService.userRegister(userRegister);
+      Notification('success', 'Đăng ký thành công');
+      history.push('/login')
+    } catch (error) {
+      Notification('error', 'Đăng ký không thành công', error.response.data.content);
+    }
+    setTimeout(() => { dispatch({ type: HIDE_LOADING }) }, 300)
   }
 }
