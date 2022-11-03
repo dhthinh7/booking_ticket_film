@@ -9,11 +9,8 @@ import { withFormik } from 'formik';
 import { userRegisterAction } from '../../redux/actions/UserManageAction';
 function Register(props) {
   const {
-    values,
-    touched,
     errors,
     handleChange,
-    handleBlur,
     handleSubmit,
   } = props;
 
