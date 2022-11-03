@@ -8,3 +8,5 @@ export const STATUS_CODE = {
   NOT_FOUND: 404,
   SERVER_ERROR:500
 }
+
+export const regExPhone = /(84[0-9]{8})|(0[0-9]{9})\b/g;

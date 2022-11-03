@@ -10,10 +10,6 @@ export default function Login(props) {
 
   const dispatch = useDispatch();
 
-  // const {userLogin} = useSelector(state=>state.QuanLyNguoiDungReducer);
-
-  // console.log('userLogin',userLogin)
-
   const formik = useFormik({
     initialValues: {
       taiKhoan: '',

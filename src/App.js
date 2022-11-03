@@ -16,8 +16,11 @@ import Register from "./pages/Register/Register";
 import Checkout from "./pages/Checkout/Checkout";
 import Loading from "./components/Loading/Loading";
 import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
-import Dashboard from "./templates/AdminTemplate/Dashboard/Dashboard";
-
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
+import Films from "./pages/Admin/Films/Films";
+import EditFilm from "./pages/Admin/EditFilm/EditFilm";
+import ShowTime from "./pages/Admin/ShowTime/ShowTime";
+import AddFilm from "./pages/Admin/Films/AddFilm/AddFilm";
 
 export default function App() {
   return (
@@ -34,6 +37,10 @@ export default function App() {
         <Route path='/login' exact component={Login} />;
         <Route path='/register' exact component={Register} />;
         <AdminTemplate path='/admin' exact Component={Dashboard}/>;
+        <AdminTemplate path='/admin/films' exact Component={Films}/>;
+        <AdminTemplate path='/admin/films/edit/:id' exact Component={EditFilm}/>;
+        <AdminTemplate path='/admin/films/showtime/:id/:name' exact Component={ShowTime}/>;
+        <AdminTemplate path='/admin/films/addnew' exact Component={AddFilm}/>;
       </Switch>
     </div>
   )
