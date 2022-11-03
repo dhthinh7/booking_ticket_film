@@ -9,6 +9,7 @@ class UserManageService extends baseServices {
     return keyWord.trim() !== '' ? this.get(`QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUP}&tuKhoa=${keyWord}`) :
     this.get(`QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUP}`)
   };
+  deleteUser = (userAccount) => this.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${userAccount}`);
 }
 
 export const userManageService = new UserManageService();

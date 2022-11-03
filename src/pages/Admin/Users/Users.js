@@ -5,7 +5,7 @@ import { EditOutlined, SearchOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
-import { getListUserAction } from '../../../redux/actions/UserManageAction';
+import { deleteUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
 const { Search } = Input;
 
 export default function Films() {
@@ -19,8 +19,6 @@ export default function Films() {
   dataTable = dataTable.map((item, index) => {
     return {...item, stt: index}
   })
-  console.log("dataTable", dataTable);
-
 
   useEffect(() => {
     dispatch(getListUserAction());
@@ -75,8 +73,8 @@ export default function Films() {
 
           {/* Delete film */}
           <span style={{ cursor: 'pointer' }} key={2} className="text-2xl" onClick={() => {
-            if (window.confirm('Bạn có chắc muốn xoá phim ' + record.tenPhim)) {
-              // action delete code 
+            if (window.confirm('Bạn có chắc muốn xoá tài khoản ' + record.taiKhoan)) {
+              dispatch(deleteUserAction(record.taiKhoan, searchText))
             }
           }}><DeleteOutlined style={{ color: 'red' }} /></span>
         </Fragment>
@@ -89,11 +87,12 @@ export default function Films() {
   function onChange(pagination, filters, sorter, extra) {
     console.log('params', pagination, filters, sorter, extra);
   }
-  console.log("data")
+  
   const onSearchChange = (e) => {
     refOnsearchChange.current && clearTimeout(refOnsearchChange.current);
 
     refOnsearchChange.current = setTimeout(() => {
+      setSearchText(e.target.value);
       dispatch(getListUserAction(e.target.value));
     }, 300)
   }

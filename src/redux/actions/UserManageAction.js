@@ -16,7 +16,7 @@ export const userLoginAction = (userAccount) => {
           type: LOGIN_ACTION,
           userAccount: data.content
         })
-        history.goBack()
+        history.push('/')
       }
     } catch (error) {
 
@@ -68,5 +68,22 @@ export const getListUserAction = (keyWord = '') => {
     } catch (error) {
       
     }
+  }
+}
+
+export const deleteUserAction = (userAccount, searchText) => {
+  return async (dispatch) => {
+    dispatch({type: SHOW_LOADING});
+    try {
+      await userManageService.deleteUser(userAccount);
+      Notification('success', 'Xóa người dùng thành công');
+      getListUserAction(searchText)
+    } catch (error) {
+      Notification('error', 'Xóa người dùng không thành công', error.response.data.content);
+    }
+
+    setTimeout(() => {
+      dispatch({type: HIDE_LOADING});
+    }, 300);
   }
 }
