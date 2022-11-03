@@ -2,7 +2,7 @@ import { history } from "../..";
 import { userManageService } from "../../services/UserManageService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
-import { GET_ACCOUNT_INFORMATION, GET_LIST_USERS, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
+import { GET_ACCOUNT_INFORMATION, GET_LIST_USERS, GET_TYPE_OF_USER, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
 
 export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
@@ -66,14 +66,14 @@ export const getListUserAction = (keyWord = '') => {
         })
       }
     } catch (error) {
-      
+
     }
   }
 }
 
 export const deleteUserAction = (userAccount, searchText) => {
   return async (dispatch) => {
-    dispatch({type: SHOW_LOADING});
+    dispatch({ type: SHOW_LOADING });
     try {
       await userManageService.deleteUser(userAccount);
       Notification('success', 'Xóa người dùng thành công');
@@ -82,6 +82,37 @@ export const deleteUserAction = (userAccount, searchText) => {
       Notification('error', 'Xóa người dùng không thành công', error.response.data.content);
     }
 
+    setTimeout(() => {
+      dispatch({ type: HIDE_LOADING });
+    }, 300);
+  }
+}
+
+export const getListTyeOfUserAction = () => {
+  return async (dispatch) => {
+    try {
+      let { data } = await userManageService.getListTyeOfUser();
+      dispatch({
+        type: GET_TYPE_OF_USER,
+        listTypeOfUser: data.content
+      })
+    } catch (error) {
+
+    }
+  }
+}
+
+export const editUserAction = (userUpdated) => {
+
+  return async (dispatch) => {
+    dispatch({type: SHOW_LOADING});
+    try {
+      await userManageService.editUser(userUpdated)
+      Notification('success', 'Cập nhật thông tin người dùng thành công');
+      history.push('/admin/users');
+    } catch (error) {
+      Notification('error', 'Cập nhật thông tin người dùng không thành công', error.response.data.content)
+    }
     setTimeout(() => {
       dispatch({type: HIDE_LOADING});
     }, 300);

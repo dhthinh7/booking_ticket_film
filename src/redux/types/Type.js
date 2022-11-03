@@ -1,6 +1,8 @@
 // User
 export const LOGIN_ACTION = 'LOGIN_ACTION';
 export const GET_LIST_USERS = 'GET_LIST_USERS';
+export const GET_ACCOUNT_USER_DETAIL = 'GET_ACCOUNT_USER_DETAIL';
+export const GET_TYPE_OF_USER = 'GET_TYPE_OF_USER';
 
 // Loading
 export const SHOW_LOADING = 'SHOW_LOADING';
