@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
 import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
 import { history } from "../../..";
 
-export default function CarouselFilms() {
+function CarouselFilms() {
   const dispatch = useDispatch();
   let { listFilms } = useSelector(state => state.FilmManageReducer)
 
@@ -45,14 +45,14 @@ export default function CarouselFilms() {
             }}>ĐẶT VÉ</button>
           </div>
         </div>
-
       </div>
     })
   }
-
   return <div className="bk-carousel-menu container mx-auto w-4/6">
     <Slider {...settings}>
       {renderFilm()}
     </Slider>
   </div>;
 }
+
+export default memo(CarouselFilms);

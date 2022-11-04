@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Form,
   Input,
@@ -13,11 +13,16 @@ import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { GROUP } from '../../../../utils/config';
 import { addNewFilmAction } from '../../../../redux/actions/FilmMangeAction';
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE } from '../../../../redux/types/Type';
 
 const AddFilm = () => {
   const [componentSize, setComponentSize] = useState('default');
   const [imgSrc, setImgSrc] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films/addnew'})
+  }, [])
 
   const formik = useFormik({
     initialValues: {

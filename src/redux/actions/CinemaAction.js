@@ -6,6 +6,7 @@ export const getShowTimeOfFilmAction = () => {
   return async (dispatch) => {
     try {
       let { data, status } = await cinemaService.getShowTimeOfFilm();
+      console.log("datat cinema", data)
       if (status === STATUS_CODE.SUCCESS) {
         dispatch({
           type: GET_LIST_CINEMA_DETAIL,

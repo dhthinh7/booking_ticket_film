@@ -3,7 +3,7 @@ import { bookingTicketServices } from "../../services/BookingTicketServices"
 import { STATUS_CODE } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
 
-import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_TICKET_ROOM, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
+import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_TICKET_ROOM, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
 
 export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
   return async (dispatch) => {
@@ -80,6 +80,7 @@ export const taoLichChieuAction = (lichChieu) => {
       let { data, status } = await bookingTicketServices.taoLichChieu(lichChieu);
       Notification('success', data.content)
       history.push('/admin/films');
+      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'})
     } catch (error) {
       Notification('error', 'Tạo lịch chiếu không thành công', error.response.data.content);
     }

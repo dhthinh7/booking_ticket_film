@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../..';
 import { userLoginAction } from '../../redux/actions/UserManageAction';
-// import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
 
 export default function Login(props) {
 
@@ -22,7 +21,6 @@ export default function Login(props) {
 
   return (
     <form onSubmit={formik.handleSubmit} className="lg:w-1/2 xl:max-w-screen-sm mx-auto">
-
       <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
         <h2 className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">Đăng nhập</h2>
         <div className="mt-12">

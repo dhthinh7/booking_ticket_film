@@ -1,7 +1,8 @@
-import { GET_FILM_INFORMATION, GET_LIST_BANNER, GET_LIST_FILMS } from "../types/Type";
+import { GET_FILM_INFORMATION, GET_LIST_BANNER, GET_LIST_FILMS, GET_LIST_PHIM_DC, GET_LIST_PHIM_SC } from "../types/Type";
 
 const initialState = {
   listBanner: [],
+  listFilmAll: [],
   listFilms: [],
   filmInformation: {}
 };
@@ -9,11 +10,25 @@ const initialState = {
 export const FilmManageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LIST_BANNER:
-      return {...state, listBanner: action.listBanner};
+      return { ...state, listBanner: action.listBanner };
+
     case GET_LIST_FILMS:
-      return {...state, listFilms: action.listFilms};
+      // Filter lít phim đang chiếu - đầu tiên sẽ load phim đang chiếu
+      let listFilms = action.listFilms.filter(item => item.dangChieu === true);
+      return { ...state, listFilmAll: action.listFilms, listFilms: listFilms };
+
+    case GET_LIST_PHIM_DC:
+      let listFilmDC = state.listFilmAll.filter((item) => item.dangChieu === true)
+      console.log('Re-render at GET_LIST_PHIM_DC FilmManageReducer')
+      return { ...state, listFilms: listFilmDC }
+
+    case GET_LIST_PHIM_SC:
+      let listFilmSC = state.listFilmAll.filter((item) => item.dangChieu === false)
+      console.log('Re-render at GET_LIST_PHIM_SC FilmManageReducer')
+      return { ...state, listFilms: listFilmSC }
+
     case GET_FILM_INFORMATION:
-      return {...state, filmInformation: action.filmInformation};
+      return { ...state, filmInformation: action.filmInformation };
     default:
       return { ...state };
   }

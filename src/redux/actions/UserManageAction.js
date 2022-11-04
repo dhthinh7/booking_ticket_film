@@ -2,7 +2,7 @@ import { history } from "../..";
 import { userManageService } from "../../services/UserManageService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
-import { GET_ACCOUNT_INFORMATION, GET_LIST_USERS, GET_TYPE_OF_USER, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_ACCOUNT_INFORMATION, GET_LIST_USERS, GET_TYPE_OF_USER, HIDE_LOADING, LOGIN_ACTION, SHOW_LOADING } from "../types/Type";
 
 export const userLoginAction = (userAccount) => {
   return async (dispatch) => {
@@ -66,7 +66,7 @@ export const getListUserAction = (keyWord = '') => {
         })
       }
     } catch (error) {
-      console.log(error)
+      
     }
   }
 }
@@ -115,6 +115,7 @@ export const editUserAction = (userUpdated) => {
     setTimeout(() => {
       dispatch({type: HIDE_LOADING});
       history.push('/admin/users');
+      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users'});
     }, 300);
   }
 }
@@ -125,7 +126,6 @@ export const addNewUserAction = (userNew) => {
       let {data, status} = await userManageService.addNewUser(userNew);
       Notification('success', 'Thêm người dùng mới thành công');
     } catch (error) {
-      console.log(error)
       Notification('error', 'Thêm người dùng mới không thành công', error.response.data.content)
     }
   }

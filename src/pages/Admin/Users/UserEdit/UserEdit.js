@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { GROUP, regExPhone } from '../../../../utils/config';
 import { editUserAction, getListTyeOfUserAction } from '../../../../redux/actions/UserManageAction';
-import { HIDE_LOADING, SHOW_LOADING } from '../../../../redux/types/Type';
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, HIDE_LOADING, SHOW_LOADING } from '../../../../redux/types/Type';
 import { history } from '../../../..';
 
 function UserEdit(props) {
@@ -80,7 +80,8 @@ function UserEdit(props) {
 
               <Button onClick={() => {
                 dispatch({type: SHOW_LOADING});
-                history.push('/admin/users')
+                history.push('/admin/users');
+                dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users'})
                 setTimeout(() => {
                   dispatch({type: HIDE_LOADING});
                 }, 300)

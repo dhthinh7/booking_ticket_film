@@ -2,7 +2,7 @@ import { history } from "../..";
 import { filmManageService } from "../../services/FilmManageService"
 import { STATUS_CODE } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
-import { GET_FILM_INFORMATION, GET_LIST_BANNER, GET_LIST_FILMS, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_FILM_INFORMATION, GET_LIST_BANNER, GET_LIST_FILMS, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
 
 export const getListBannersAction = () => {
   return async (dispatch) => {
@@ -70,6 +70,7 @@ export const editUpdatedAction = (formData) => {
     try {
       await filmManageService.editUpdated(formData);
       history.push('/admin/films');
+      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'});
     } catch (error) {
 
     }
@@ -87,6 +88,7 @@ export const addNewFilmAction = (formNewFilm) => {
       await filmManageService.addNewFilm(formNewFilm);
       Notification('success', "Thêm phim thành công");
       history.push('/admin/films');
+      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'});
     } catch (error) {
       Notification('error', 'Thêm phim không thành công', error.response.data.content);
     }

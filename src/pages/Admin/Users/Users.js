@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
 import { deleteUserAction, getListTyeOfUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
-import { GET_ACCOUNT_USER_DETAIL } from '../../../redux/types/Type';
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_ACCOUNT_USER_DETAIL } from '../../../redux/types/Type';
 const { Search } = Input;
 
 export default function Films() {
@@ -23,6 +23,7 @@ export default function Films() {
 
   useEffect(() => {
     dispatch(getListUserAction());
+    dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users'})
   }, [])
 
   const columns = [
@@ -112,6 +113,7 @@ export default function Films() {
       <h3 className="text-4xl">Quản lý người dùng</h3>
       <Button className="mb-5" onClick={() => {
         history.push('/admin/users/addNewUser');
+        dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users/addNewUser'})
       }}>Thêm người dùng</Button>
       <Search
         className="mb-5"

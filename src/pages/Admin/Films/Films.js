@@ -6,6 +6,7 @@ import { EditOutlined, SearchOutlined, DeleteOutlined, CalendarOutlined } from '
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
+import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE } from '../../../redux/types/Type';
 const { Search } = Input;
 
 export default function Films() {
@@ -19,6 +20,7 @@ export default function Films() {
 
     useEffect(() => {
         dispatch(getListFilmsAction());
+        dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'});
     }, [])
 
     const columns = [
@@ -117,6 +119,7 @@ export default function Films() {
             <h3 className="text-4xl">Quản lý Phim</h3>
             <Button className="mb-5" onClick={() => {
                 history.push('/admin/films/addnew');
+                dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films/addnew'})
             }}>Thêm phim</Button>
             <Search
                 className="mb-5"

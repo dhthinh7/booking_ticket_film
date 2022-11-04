@@ -10,6 +10,7 @@ export const HIDE_LOADING = 'HIDE_LOADING';
 
 // Change to tab active
 export const CHANGE_TAB_ACTIVE = 'CHANGE_TAB_ACTIVE';
+export const CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE = 'CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE';
 
 // Get account information
 export const GET_ACCOUNT_INFORMATION = 'GET_ACCOUNT_INFORMATION';
@@ -18,6 +19,8 @@ export const GET_ACCOUNT_INFORMATION = 'GET_ACCOUNT_INFORMATION';
 export const GET_FILM_INFORMATION = 'GET_FILM_INFORMATION';
 export const GET_LIST_BANNER = 'GET_LIST_BANNER';
 export const GET_LIST_FILMS = 'GET_LIST_FILMS';
+export const GET_LIST_PHIM_DC = 'GET_LIST_PHIM_DC';
+export const GET_LIST_PHIM_SC = 'GET_LIST_PHIM_SC';
 
 // Cinema
 export const GET_ALL_CINEMA = 'GET_ALL_CINEMA';

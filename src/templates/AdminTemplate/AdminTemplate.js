@@ -1,35 +1,35 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
   DesktopOutlined,
-  PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
 import _ from "lodash";
-import { history } from "../..";
-import { TOKEN, USER_LOGIN } from "../../utils/config";
+import { USER_LOGIN } from "../../utils/config";
 import AccountDisplay from "../../components/AccountDisplay/AccountDisplay";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
-
-
 
 const AdminTemplate = (props) => { //path, exact, Component
 
   const { Component, ...restProps } = props;
   const { userLogin } = useSelector(state => state.UserManageReducer);
-
+  const { selectedKeys } = useSelector(state => state.AdminTemplateReducer);
+  let [ stateSelectedKeys, setStateSelectedKeys ] = useState(selectedKeys);
   const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
   };
+
+  useEffect(()=>{
+    setStateSelectedKeys(selectedKeys)
+  }, [selectedKeys])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,33 +46,33 @@ const AdminTemplate = (props) => { //path, exact, Component
   }
 
   return <Route {...restProps} render={(propsRoute) => { //props.location,props.history,props.match
-
     return <Fragment>
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <div className="logo mt-3 ml-4 w-9">
             <img className="" src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="logo" />
           </div>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              <NavLink to="/admin/users">Users</NavLink>
+          <Menu theme="dark" selectedKeys={stateSelectedKeys} mode="inline">
+            <Menu.Item key="/admin/users" icon={<UserOutlined />}>
+              <NavLink to="/admin/users" onClick={() => setStateSelectedKeys('/admin/users')}>Users</NavLink>
             </Menu.Item>
-            <SubMenu key="sub1" icon={<FileOutlined />} title="Films">
-              <Menu.Item key="10" icon={<FileOutlined />}>
-                <NavLink to="/admin/films">Films</NavLink>
+            <SubMenu key="Films" icon={<FileOutlined />} title="Films">
+              <Menu.Item key="/admin/films" icon={<FileOutlined />}>
+                <NavLink to="/admin/films" onClick={() => setStateSelectedKeys('/admin/films')}>Films</NavLink>
               </Menu.Item>
-              <Menu.Item key="11" icon={<FileOutlined />}>
-                <NavLink to="/admin/films/addnew">Add new</NavLink>
+              <Menu.Item key="/admin/films/addnew" icon={<FileOutlined />}>
+                <NavLink to="/admin/films/addnew" onClick={() => setStateSelectedKeys('/admin/films/addnew')}>Add new</NavLink>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="3" icon={<DesktopOutlined />}>
-              <NavLink to="/admin/showtimes">Showtime</NavLink>
+            <Menu.Item key="/admin/showtimes" icon={<DesktopOutlined />}>
+              <NavLink to="/admin/users" onClick={() => setStateSelectedKeys('/admin/users')} className="hover:cursor-not-allowed">Showtime</NavLink>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="bg-white" style={{ padding: 0 }} >
-            <div className="flex justify-end pr-5">
+            <div className="flex justify-between pr-5">
+            <NavLink to="/" className='ml-5 font-medium hover:text-red-500 duration-300'>Client side</NavLink>
               <AccountDisplay />
             </div>
           </Header>
@@ -81,13 +81,10 @@ const AdminTemplate = (props) => { //path, exact, Component
               <Component {...propsRoute} />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
       </Layout>
     </Fragment>
   }} />
-
 }
-
 
 export default AdminTemplate;

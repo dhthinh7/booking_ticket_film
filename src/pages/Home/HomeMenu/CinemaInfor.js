@@ -1,12 +1,12 @@
 import { Tabs } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShowTimeOfFilmAction } from "../../../redux/actions/CinemaAction";
 import moment from 'moment';
 import { NavLink } from "react-router-dom";
 const { TabPane } = Tabs;
 
-export default function CinemaInfor() {
+function CinemaInfor() {
 
   const dispacth = useDispatch()
   let { listCinemaDetail } = useSelector(state => state.CinemaReducer)
@@ -62,3 +62,5 @@ export default function CinemaInfor() {
     </Tabs>
   </div>;
 }
+
+export default memo(CinemaInfor);
