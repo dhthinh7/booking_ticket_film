@@ -12,6 +12,7 @@ class UserManageService extends baseServices {
   deleteUser = (userAccount) => this.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${userAccount}`);
   getListTyeOfUser = () => this.get(`QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`);
   editUser = (userUpdated) => this.put(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, userUpdated);
+  addNewUser = (userNew) => this.post(`QuanLyNguoiDung/ThemNguoiDung`, userNew);
 }
 
 export const userManageService = new UserManageService();
