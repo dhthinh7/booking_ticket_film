@@ -23,6 +23,7 @@ import ShowTime from "./pages/Admin/ShowTime/ShowTime";
 import AddFilm from "./pages/Admin/Films/AddFilm/AddFilm";
 import Users from "./pages/Admin/Users/Users";
 import UserEdit from "./pages/Admin/Users/UserEdit/UserEdit";
+import AddNewUser from "./pages/Admin/Users/AddNewUser/AddNewUser";
 
 export default function App() {
   return (
@@ -45,6 +46,7 @@ export default function App() {
         <AdminTemplate path='/admin/films/addnew' exact Component={AddFilm}/>;
         <AdminTemplate path='/admin/users' exact Component={Users}/>;
         <AdminTemplate path='/admin/users/edit' exact Component={UserEdit}/>;
+        <AdminTemplate path='/admin/users/addNewUser' exact Component={AddNewUser}/>;
       </Switch>
     </div>
   )

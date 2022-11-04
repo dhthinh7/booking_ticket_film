@@ -5,7 +5,7 @@ import { EditOutlined, SearchOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
-import { deleteUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
+import { deleteUserAction, getListTyeOfUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
 import { GET_ACCOUNT_USER_DETAIL } from '../../../redux/types/Type';
 const { Search } = Input;
 
@@ -98,12 +98,12 @@ export default function Films() {
     refOnsearchChange.current && clearTimeout(refOnsearchChange.current);
 
     refOnsearchChange.current = setTimeout(() => {
-      setSearchText(e.target.value);
       dispatch(getListUserAction(e.target.value));
     }, 300)
   }
 
   const handleSearch = (value) => {
+    setSearchText(value);
     dispatch(getListUserAction(value));
   }
 
@@ -111,7 +111,7 @@ export default function Films() {
     <div>
       <h3 className="text-4xl">Quản lý người dùng</h3>
       <Button className="mb-5" onClick={() => {
-        // history.push('/admin/films/addnew');
+        history.push('/admin/users/addNewUser');
       }}>Thêm người dùng</Button>
       <Search
         className="mb-5"
