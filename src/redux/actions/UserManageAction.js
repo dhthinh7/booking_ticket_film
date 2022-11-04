@@ -109,12 +109,12 @@ export const editUserAction = (userUpdated) => {
     try {
       await userManageService.editUser(userUpdated)
       Notification('success', 'Cập nhật thông tin người dùng thành công');
-      history.push('/admin/users');
     } catch (error) {
       Notification('error', 'Cập nhật thông tin người dùng không thành công', error.response.data.content)
     }
     setTimeout(() => {
       dispatch({type: HIDE_LOADING});
+      history.push('/admin/users');
     }, 300);
   }
 }

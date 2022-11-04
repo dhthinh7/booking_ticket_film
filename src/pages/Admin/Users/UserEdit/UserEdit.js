@@ -54,7 +54,7 @@ function UserEdit(props) {
             <select className="mt-3 w-full form-control" name='maLoaiNguoiDung' value={values.maLoaiNguoiDung} onChange={handleChange}>
               {handleSelection()}
             </select>
-            <div className="text-danger h-5">{errors.soDt}</div>
+            <div className="text-danger h-5">{errors.maLoaiNguoiDung}</div>
 
           </div>
 
