@@ -18,7 +18,6 @@ export const CinemaReducer = (state = initialState, action) => {
     case GET_GROUP_OF_CINEMA:
       return { ...state, groupOfCinema: action.groupOfCinema}
     default:
-      console.log('Re-render at Default CinemaReducer')
       return { ...state };
   }
 };

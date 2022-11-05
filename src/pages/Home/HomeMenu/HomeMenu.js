@@ -1,20 +1,31 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { GET_LIST_PHIM_DC, GET_LIST_PHIM_SC } from "../../../redux/types/Type";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getShowTimeOfFilmAction } from "../../../redux/actions/CinemaAction";
+import { GET_LIST_PHIM_DC, GET_LIST_PHIM_SC, HIDE_LOADING, SHOW_LOADING } from "../../../redux/types/Type";
 import CarouselFilms from "./CarouselFilms";
 import CinemaInfor from "./CinemaInfor";
 import './style.scss';
 export default function HomeMenu() {
-  
+
   const dispatch = useDispatch();
+  let { listCinemaDetail } = useSelector(state => state.CinemaReducer);
+
   const handleOnclick = (e) => {
     // Change tab active
     document.querySelectorAll('.actived')[0]?.classList.remove('actived');
     e.target.classList.add('actived');
 
     // Dispatch action to get list film
-    [...e.target.classList].includes('phimDC') ? dispatch({type: GET_LIST_PHIM_DC}) : dispatch({type: GET_LIST_PHIM_SC})
+    [...e.target.classList].includes('phimDC') ? dispatch({ type: GET_LIST_PHIM_DC }) : dispatch({ type: GET_LIST_PHIM_SC })
+    dispatch({ type: SHOW_LOADING })
+    setTimeout(() => {
+      dispatch({ type: HIDE_LOADING })
+    }, 300);
   }
+
+  useEffect(() => {
+    dispatch(getShowTimeOfFilmAction())
+  }, [])
 
   return <div className="bk-home-menu my-10">
     <div className="bk-menu-btn flex justify-center items-center mb-10">
@@ -24,6 +35,6 @@ export default function HomeMenu() {
     {/* Handle carousel list films */}
     <CarouselFilms />
     {/* Handle list cinema */}
-    <CinemaInfor />
+    <CinemaInfor listCinemaDetail={listCinemaDetail} />
   </div>;
 }

@@ -1,24 +1,26 @@
 import { Tabs } from "antd";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShowTimeOfFilmAction } from "../../../redux/actions/CinemaAction";
 import moment from 'moment';
 import { NavLink } from "react-router-dom";
 const { TabPane } = Tabs;
 
-function CinemaInfor() {
+function CinemaInfor(props) {
+  
+  let listCinemaDetail = props.listCinemaDetail
+  // const dispatch = useDispatch()
+  // let { listCinemaDetail } = useSelector(state => state.CinemaReducer)
+  console.log("listCinemaDetail", listCinemaDetail);
 
-  const dispacth = useDispatch()
-  let { listCinemaDetail } = useSelector(state => state.CinemaReducer)
+  // useEffect(() => {
+  //   dispatch(getShowTimeOfFilmAction())
+  // }, [])
 
-  useEffect(() => {
-    dispacth(getShowTimeOfFilmAction())
-  }, [])
-
-  // Render cenema detail from API LayThongTinLichChieuHeThongRap
+  // Render cinema detail from API LayThongTinLichChieuHeThongRap
   const renderCinemaDetail = () => {
     return listCinemaDetail.map((item, index) => {
-      return <TabPane tab={<img src={item.logo} className="w-12" />} key={index}>
+      return <TabPane tab={<img src={item.logo} className="w-12" alt="xyz"/>} key={index}>
         <Tabs tabPosition="left">
           {item.lstCumRap.splice(0, 8).map((listGroupCinema, index) => {
             return <TabPane tab={

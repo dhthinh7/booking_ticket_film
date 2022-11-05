@@ -19,12 +19,10 @@ export const FilmManageReducer = (state = initialState, action) => {
 
     case GET_LIST_PHIM_DC:
       let listFilmDC = state.listFilmAll.filter((item) => item.dangChieu === true)
-      console.log('Re-render at GET_LIST_PHIM_DC FilmManageReducer')
       return { ...state, listFilms: listFilmDC }
 
     case GET_LIST_PHIM_SC:
       let listFilmSC = state.listFilmAll.filter((item) => item.dangChieu === false)
-      console.log('Re-render at GET_LIST_PHIM_SC FilmManageReducer')
       return { ...state, listFilms: listFilmSC }
 
     case GET_FILM_INFORMATION:
