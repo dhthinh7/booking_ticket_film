@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
-import { Button, Table } from 'antd';
+import { Button, Table, Input } from 'antd';
 import { deleteFilms, getListFilmsAction } from '../../../redux/actions/FilmMangeAction'
-import { Input } from 'antd';
 import { EditOutlined, SearchOutlined, DeleteOutlined, CalendarOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -14,9 +13,9 @@ export default function Films() {
     const dispatch = useDispatch();
     let [searchText, setSearchText] = useState('');
     const refOnsearchChange = useRef(null);
-    const { listFilms } = useSelector(state => state.FilmManageReducer);
+    const { listFilmAll } = useSelector(state => state.FilmManageReducer);
 
-    const dataTable = listFilms;
+    const dataTable = listFilmAll;
 
     useEffect(() => {
         dispatch(getListFilmsAction());
@@ -31,7 +30,6 @@ export default function Films() {
             sorter: (a, b) => a.maPhim - b.maPhim,
             sortDirections: ['descend', 'ascend'],
             width: '15%'
-            // sortOrder:'descend'
         },
         {
             key: 'hinhAnh',
@@ -39,7 +37,7 @@ export default function Films() {
             dataIndex: 'hinhAnh',
             render: (text, film, index) => {
                 return <Fragment>
-                    <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50} onError={(e) => { e.target.onError = null; e.target.src = `https://picsum.photos/id/${index}/50/50` }} />
+                    <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50}/>
                 </Fragment>
             },
             width: '15%'

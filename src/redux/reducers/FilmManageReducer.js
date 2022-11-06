@@ -13,7 +13,7 @@ export const FilmManageReducer = (state = initialState, action) => {
       return { ...state, listBanner: action.listBanner };
 
     case GET_LIST_FILMS:
-      // Filter lít phim đang chiếu - đầu tiên sẽ load phim đang chiếu
+      // Filter list phim đang chiếu - đầu tiên sẽ load phim đang chiếu
       let listFilms = action.listFilms.filter(item => item.dangChieu === true);
       return { ...state, listFilmAll: action.listFilms, listFilms: listFilms };
 

@@ -19,7 +19,7 @@ export const userLoginAction = (userAccount) => {
         history.push('/')
       }
     } catch (error) {
-
+      Notification('error', 'Đăng nhập không thành công', error.response.data.content);
     }
     setTimeout(() => {
       dispatch({ type: HIDE_LOADING });
@@ -66,7 +66,7 @@ export const getListUserAction = (keyWord = '') => {
         })
       }
     } catch (error) {
-      
+
     }
   }
 }
@@ -105,7 +105,7 @@ export const getListTyeOfUserAction = () => {
 export const editUserAction = (userUpdated) => {
 
   return async (dispatch) => {
-    dispatch({type: SHOW_LOADING});
+    dispatch({ type: SHOW_LOADING });
     try {
       await userManageService.editUser(userUpdated)
       Notification('success', 'Cập nhật thông tin người dùng thành công');
@@ -113,9 +113,9 @@ export const editUserAction = (userUpdated) => {
       Notification('error', 'Cập nhật thông tin người dùng không thành công', error.response.data.content)
     }
     setTimeout(() => {
-      dispatch({type: HIDE_LOADING});
+      dispatch({ type: HIDE_LOADING });
       history.push('/admin/users');
-      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users'});
+      dispatch({ type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users' });
     }, 300);
   }
 }
@@ -123,7 +123,7 @@ export const editUserAction = (userUpdated) => {
 export const addNewUserAction = (userNew) => {
   return async () => {
     try {
-      let {data, status} = await userManageService.addNewUser(userNew);
+      let { data, status } = await userManageService.addNewUser(userNew);
       Notification('success', 'Thêm người dùng mới thành công');
     } catch (error) {
       Notification('error', 'Thêm người dùng mới không thành công', error.response.data.content)

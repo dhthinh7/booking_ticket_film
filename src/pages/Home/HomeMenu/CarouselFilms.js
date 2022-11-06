@@ -28,7 +28,7 @@ function CarouselFilms() {
     return listFilms?.map((item, index) => {
       return <div key={index}>
         <div className="bk-item">
-          <div className="film-img" style={{ backgroundImage: `url(${item.hinhAnh})` }}>
+          <div className="film-img" style={{ backgroundImage: `url(${item.hinhAnh}), url('https://picsum.photos/300/300')` }}>
             <div className="bk-overload"></div>
             <div className="trailer">
               <PlayCircleOutlined />

@@ -60,7 +60,7 @@ export default function Detail(props) {
                 {filmDetail.heThongRapChieu?.map((htr, index) => {
                   return <TabPane
                     tab={<div className="flex flex-row items-center justify-center">
-                      <img src={htr.logo} className="rounded-full w-full" style={{ width: 50 }} alt="..." />
+                      <img src={htr.logo} className="rounded-full w-full" style={{ width: 50 }} alt="..." onError={(e) => { e.target.onError = null; e.target.src = `https://picsum.photos/id/${index}/50/50` }}/>
                       <div className="text-center ml-2">
                         {htr.tenHeThongRap}
                       </div>

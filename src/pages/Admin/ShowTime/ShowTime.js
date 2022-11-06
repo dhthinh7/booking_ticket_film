@@ -69,7 +69,7 @@ export default function ShowTime(props) {
     <div className="container flex justify-around">
       <div className="image">
         <h3 className="text-2xl">Tạo lịch chiếu - {props.match.params.name}</h3>
-        <img src={film.hinhAnh} alt='...' width={200} height={100} />
+        <img src={film.hinhAnh} alt='...' width={200} height={100}/>
       </div>
       <Form
         name="basic"
