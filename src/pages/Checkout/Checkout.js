@@ -4,11 +4,9 @@ import React, { Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import _ from 'lodash';
 import { useDispatch, useSelector } from "react-redux";
-import history from '../../App'
-import { TOKEN, USER_LOGIN } from "../../utils/config";
 import './Style.scss';
 import { datGheAction, datVeAction, layDanhSachPhongVeAction } from "../../redux/actions/BookingTicketActions";
-import { BOOKING_TICKET, CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
+import { CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
 import { connection } from "../..";
 import { accountInformationAction } from "../../redux/actions/UserManageAction";
 import moment from 'moment';

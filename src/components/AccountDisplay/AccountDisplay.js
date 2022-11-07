@@ -13,7 +13,7 @@ export default function AccountDisplay() {
           history.push('/')
         }}>
           <div style={{ width: 40, height: 40 }} className="text-2xl mr-1 rounded-full bg-red-200 leading-8">
-            {userLogin.taiKhoan.substr(0, 1)}
+            {userLogin.taiKhoan?.substr(0, 1)}
           </div>
           <div className="font-medium text-green-500">Hello ! {userLogin.taiKhoan}</div>
         </button>

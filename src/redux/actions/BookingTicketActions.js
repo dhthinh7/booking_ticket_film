@@ -4,6 +4,7 @@ import { STATUS_CODE } from "../../utils/config";
 import { Notification } from "../../utils/Notification";
 
 import { BOOKING_ACTION, BOOKING_TICKET, CHANGE_TAB_ACTIVE, CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_TICKET_ROOM, HIDE_LOADING, SHOW_LOADING } from "../types/Type";
+import { accountInformationAction } from "./UserManageAction";
 
 export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
   return async (dispatch) => {
@@ -40,6 +41,7 @@ export const datVeAction = (danhSachVe) => {
       let { status } = await bookingTicketServices.datVe(danhSachVe);
       if (status === STATUS_CODE.SUCCESS) {
         await dispatch(layDanhSachPhongVeAction(danhSachVe.maLichChieu, true))
+        await dispatch(accountInformationAction());
         await dispatch({ type: BOOKING_ACTION })
         await dispatch({
           type: CHANGE_TAB_ACTIVE,
@@ -47,6 +49,7 @@ export const datVeAction = (danhSachVe) => {
         })
       }
     } catch (error) {
+      console.log(error)
       alert('Không thể đặt vé')
     }
   }
