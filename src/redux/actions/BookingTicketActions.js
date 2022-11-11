@@ -20,13 +20,9 @@ export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
           type: GET_TICKET_ROOM,
           chiTietPhongVe: data.content
         })
-        await dispatch({
-          type: CHANGE_TAB_ACTIVE,
-          number: '1'
-        })
       }
     } catch (error) {
-      
+
     }
 
     isLoading && await dispatch({
@@ -36,13 +32,15 @@ export const layDanhSachPhongVeAction = (maLichChieu, isLoading = false) => {
 }
 
 export const datVeAction = (danhSachVe) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       let { status } = await bookingTicketServices.datVe(danhSachVe);
       if (status === STATUS_CODE.SUCCESS) {
         await dispatch(layDanhSachPhongVeAction(danhSachVe.maLichChieu, true))
         await dispatch(accountInformationAction());
         await dispatch({ type: BOOKING_ACTION })
+        let userLogin = getState().UserManageReducer.userLogin;
+        connection.invoke('datGheThanhCong', userLogin.taiKhoan, danhSachVe.maLichChieu);
         await dispatch({
           type: CHANGE_TAB_ACTIVE,
           number: '2'
@@ -67,9 +65,13 @@ export const datGheAction = (ghe, maLichChieu) => {
     // Use getState to get data from reducer
     let danhSachGheDangDat = getState().BookingTicketReducer.danhSachGheDangDat;
     let taiKhoan = getState().UserManageReducer.userLogin.taiKhoan;
-     
+    
+    console.log('danhSachGheDangDat', danhSachGheDangDat);
+    console.log('taiKhoan', taiKhoan);
+    console.log('maLichChieu', maLichChieu);
     // Convert object to JSON to as argument for calling api signalR
     danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
+
 
     // Call api signalR to inform to server update status of seat
     connection.invoke('datGhe', taiKhoan, danhSachGheDangDat, maLichChieu);
@@ -78,15 +80,15 @@ export const datGheAction = (ghe, maLichChieu) => {
 
 export const taoLichChieuAction = (lichChieu) => {
   return async (dispatch) => {
-    dispatch({type: SHOW_LOADING});
+    dispatch({ type: SHOW_LOADING });
     try {
       let { data, status } = await bookingTicketServices.taoLichChieu(lichChieu);
       Notification('success', data.content)
       history.push('/admin/films');
-      dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'})
+      dispatch({ type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films' })
     } catch (error) {
       Notification('error', 'Tạo lịch chiếu không thành công', error.response.data.content);
     }
-    setTimeout(() => dispatch({type: HIDE_LOADING}), 300)
+    setTimeout(() => dispatch({ type: HIDE_LOADING }), 300)
   }
 }

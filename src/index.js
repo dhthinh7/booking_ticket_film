@@ -11,7 +11,6 @@ import { store } from './redux/configStore';
 
 // Import signalR as websocket io
 import * as signalR from '@aspnet/signalr';
-import { DOMAIN } from './utils/config';
 
 // Create connection to listen event from server
 export const connection = new signalR.HubConnectionBuilder().withUrl(`https://movieapi.cyberlearn.vn/DatVeHub`).configureLogging(signalR.LogLevel.Information).build();
@@ -29,7 +28,7 @@ connection.start().then(()=>{
     // document.getElementById('root')
   );
 }).catch(error => {
-  
+  console.log(error)
 })
 
 // If you want to start measuring performance in your app, pass a function

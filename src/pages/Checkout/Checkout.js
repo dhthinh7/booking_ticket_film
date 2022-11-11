@@ -26,7 +26,7 @@ export default function Checkout(props) {
   }, [])
 
   return <div className="m-5 relative">
-    <Tabs defaultActiveKey="1" activeKey={tabActive} onChange={(key) => {
+    <Tabs activeKey={tabActive} onChange={(key) => {
       dispatch({
         type: CHANGE_TAB_ACTIVE,
         number: key.toString()

@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShowTimeOfFilmAction } from "../../../redux/actions/CinemaAction";
+import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
 import { GET_LIST_PHIM_DC, GET_LIST_PHIM_SC, HIDE_LOADING, SHOW_LOADING } from "../../../redux/types/Type";
 import CarouselFilms from "./CarouselFilms";
 import CinemaInfor from "./CinemaInfor";
 import './style.scss';
+
 export default function HomeMenu() {
 
   const dispatch = useDispatch();
+  let { listFilms } = useSelector(state => state.FilmManageReducer)
   let { listCinemaDetail } = useSelector(state => state.CinemaReducer);
 
   const handleOnclick = (e) => {
@@ -24,7 +27,9 @@ export default function HomeMenu() {
   }
 
   useEffect(() => {
-    dispatch(getShowTimeOfFilmAction())
+    dispatch(getListFilmsAction());
+    dispatch(getShowTimeOfFilmAction());
+
   }, [])
 
   return <div className="bk-home-menu my-10">
@@ -33,7 +38,7 @@ export default function HomeMenu() {
       <button className="phimSC" onClick={handleOnclick}>Sắp chiếu</button>
     </div>
     {/* Handle carousel list films */}
-    <CarouselFilms />
+    <CarouselFilms listFilms={listFilms}/>
     {/* Handle list cinema */}
     <CinemaInfor listCinemaDetail={listCinemaDetail} />
   </div>;

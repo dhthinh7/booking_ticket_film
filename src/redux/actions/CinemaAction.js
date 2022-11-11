@@ -5,11 +5,12 @@ import { GET_ALL_CINEMA, GET_FILM_DETAIL, GET_GROUP_OF_CINEMA, GET_LIST_CINEMA_D
 export const getShowTimeOfFilmAction = () => {
   return async (dispatch) => {
     try {
-      let { data, status } = await cinemaService.getShowTimeOfFilm();
+      const {data, status } = await cinemaService.getShowTimeOfFilm();
+      let result = data.content
       if (status === STATUS_CODE.SUCCESS) {
-        dispatch({
+        await dispatch({
           type: GET_LIST_CINEMA_DETAIL,
-          listCinemaDetail: data.content
+          listCinemaDetail: result
         })
       }
     } catch (error) {
@@ -26,7 +27,6 @@ export const layThongTinLichChieuPhimAction = (filmId) => {
 
     try {
       let { data, status } = await cinemaService.layThongTinLichChieuPhim(filmId);
-
       if (status === STATUS_CODE.SUCCESS) {
         dispatch({
           type: GET_FILM_DETAIL,

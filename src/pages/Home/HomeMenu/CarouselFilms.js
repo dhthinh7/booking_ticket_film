@@ -1,18 +1,9 @@
-import React, { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { memo } from "react";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
-import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
 import { history } from "../../..";
 
-function CarouselFilms() {
-  const dispatch = useDispatch();
-  let { listFilms } = useSelector(state => state.FilmManageReducer)
-
-  useEffect(()=>{
-    dispatch(getListFilmsAction());
-  }, [])
-
+function CarouselFilms(props) {
   const settings = {
     className: "center",
     centerMode: true,
@@ -23,6 +14,8 @@ function CarouselFilms() {
     rows: 2,
     slidesPerRow: 4,
   };
+  
+  let listFilms = props.listFilms;
 
   const renderFilm = () => {
     return listFilms?.map((item, index) => {

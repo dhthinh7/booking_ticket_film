@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { layThongTinLichChieuPhimAction } from "../../redux/actions/CinemaAction";
-import { Button, CustomCard } from '@tsamantanis/react-glassmorphism'
+import { CustomCard } from '@tsamantanis/react-glassmorphism'
 import moment from 'moment';
 import { Rate, Tabs } from "antd";
 import { NavLink } from "react-router-dom";
+import { renderLichChieuTheoPhim } from "../../utils/helperFilm";
 const { TabPane } = Tabs;
 
 export default function Detail(props) {
@@ -75,12 +76,8 @@ export default function Detail(props) {
                             <p className="text-gray-400" style={{ marginTop: 0 }}>{cumRap.diaChi}</p>
                           </div>
                         </div>
-                        <div className="thong-tin-lich-chieu grid grid-cols-4">
-                          {cumRap.lichChieuPhim?.slice(0, 12).map((lichChieu, index) => {
-                            return <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index} className="col-span-1 text-green-800 font-bold">
-                              {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
-                            </NavLink>
-                          })}
+                        <div className="thong-tin-lich-chieu">
+                          {renderLichChieuTheoPhim(cumRap.lichChieuPhim)}
                         </div>
                       </div>
                     })}
