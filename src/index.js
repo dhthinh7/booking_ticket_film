@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import '../src/assets/circle.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import { Provider } from 'react-redux';
@@ -17,12 +16,12 @@ export const connection = new signalR.HubConnectionBuilder().withUrl(`https://mo
 
 export const history = createBrowserHistory()
 
-connection.start().then(()=>{
+connection.start().then(() => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
-    <Provider store={store}>  
+    <Provider store={store}>
       <Router history={history}>
-          <App />
+        <App />
       </Router>
     </Provider>,
     // document.getElementById('root')
@@ -30,8 +29,3 @@ connection.start().then(()=>{
 }).catch(error => {
   console.log(error)
 })
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
