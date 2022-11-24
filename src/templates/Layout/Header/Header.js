@@ -89,6 +89,10 @@ export default function Header() {
         <li className="flex">
           <NavLink to="/apps" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-black font-medium" activeClassName="text-red-600">Ứng dụng</NavLink>
         </li>
+        {userLogin.maLoaiNguoiDung === "QuanTri" ?
+          <li className="flex">
+            <NavLink to="/admin" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-black font-medium" activeClassName="border-b-2 border-white">Admin Home</NavLink>
+          </li> : ''}
         {!(_.isEmpty(userLogin)) ? <li>
           <div className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-black font-medium" onClick={Logout}>Đăng xuất</div>
         </li> : <>

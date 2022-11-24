@@ -5,7 +5,7 @@ import { getListFilmsAction } from "../../../redux/actions/FilmMangeAction";
 import { GET_LIST_PHIM_DC, GET_LIST_PHIM_SC, HIDE_LOADING, SHOW_LOADING } from "../../../redux/types/Type";
 import CarouselFilms from "./CarouselFilms";
 import CinemaInfor from "./CinemaInfor";
-import './style.scss';
+import './HomeMenu.scss';
 
 export default function HomeMenu() {
 

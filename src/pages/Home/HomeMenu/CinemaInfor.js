@@ -1,23 +1,34 @@
 import { Tabs } from "antd";
-import React, { memo, useEffect } from "react";
-import moment from 'moment';
-import { NavLink } from "react-router-dom";
+import React, { memo, useEffect, useState } from "react";
 import { renderLichChieuTheoPhim } from "../../../utils/helperFilm";
 const { TabPane } = Tabs;
 
 function CinemaInfor(props) {
 
-  let listCinemaDetail = props.listCinemaDetail
+  let [tabPositionParent, setTabPositionParent] = useState();
+
+  let listCinemaDetail = props.listCinemaDetail;
+
+  const handleChangeTabPosition = (e) => {
+    let screenSize = e.target.innerWidth;
+    screenSize <= 768 ? setTabPositionParent('top') : setTabPositionParent('left');
+  }
+
+  useEffect(() => {
+    window.innerWidth <= 768 ? setTabPositionParent('top') : setTabPositionParent('left');
+    window.addEventListener('resize', handleChangeTabPosition);
+    return () => window.removeEventListener('resize', handleChangeTabPosition);
+  }, [])
 
   const renderCinemaDetail = () => {
     return listCinemaDetail.map((item, index) => {
       return <TabPane tab={<img src={item.logo} className="w-12" alt="xyz" />} key={index} onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/75/75" }}>
-        <Tabs tabPosition="left">
-          {item.lstCumRap.map((listGroupCinema, index) => {
+        <Tabs className="bk-tabChild" tabPosition="left">
+          {item.lstCumRap.slice(0, 5).map((listGroupCinema, index) => {
             return <TabPane tab={
               <div className="bk-cinema-item flex items-center">
                 <div className="bk-cinema-logo w-8">
-                  <img src={listGroupCinema.hinhAnh} alt={listGroupCinema.tenCumRap} className="rounded-full w-8 h-8" onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/75/75" }} />
+                  <img src={listGroupCinema.hinhAnh} alt={listGroupCinema.tenCumRap} className="w-8 h-8" onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/75/75" }} />
                 </div>
                 <div className="bk-cinema-infor text-left pl-3">
                   <p className="bk-cinema-name m-0">{listGroupCinema.tenCumRap}</p>
@@ -25,7 +36,7 @@ function CinemaInfor(props) {
                 </div>
               </div>
             } key={index}>
-              {listGroupCinema.danhSachPhim.slice(0, 10).map((filmItem, index) => {
+              {listGroupCinema.danhSachPhim.slice(0, 5).map((filmItem, index) => {
                 // Don't show the film that has a date older current
                 // let checkListFilms = filmItem.lstLichChieuTheoPhim.filter(ngaychieu => moment(ngaychieu.ngayChieuGioChieu) >= moment());
                 // filmItem = {...filmItem, lstLichChieuTheoPhim: checkListFilms}
@@ -46,8 +57,8 @@ function CinemaInfor(props) {
     })
   }
 
-  return <div className="bk-cinema mt-3 container px-2 py-5 mx-auto w-4/6">
-    <Tabs tabPosition="left">
+  return <div className="bk-cinema mt-3 px-2 py-5">
+    <Tabs className="bk-tabParent" tabPosition={tabPositionParent}>
       {renderCinemaDetail()}
     </Tabs>
   </div>;
