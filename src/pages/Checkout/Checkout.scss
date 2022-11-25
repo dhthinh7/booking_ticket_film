@@ -1,0 +1,304 @@
+.bk-booking {
+  width: 80%;
+  margin: 2rem auto;
+  position: relative;
+  overflow: hidden;
+
+  // Style screen
+  .bk-screen {
+    border-bottom: 50px solid rgba(172, 163, 163, 0.725);
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    height: 0;
+    width: 90%;
+    opacity: 0.8;
+    filter: drop-shadow(0px 100px 63px rgb(128, 123, 123, .5));
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Style seat
+  .ghe-area {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: .5rem;
+    place-items: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ghe {
+    /* ghế thường */
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 1px;
+    cursor: pointer;
+    background-color: rgb(123, 122, 122);
+    color: #fff;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .gheDaDat {
+    background-color: rgb(232, 76, 76);
+    cursor: no-drop;
+  }
+
+  .gheDangDat {
+    background-color: rgb(18, 176, 18) !important;
+  }
+
+
+  .gheVip {
+    background-color: rgb(228, 74, 8);
+  }
+
+  .gheDaDuocDat {
+    /*ghế được chính mình đặt */
+    background-color: rgb(246, 246, 246);
+    -webkit-box-shadow: -1px 2px 18px -6px orange;
+    box-shadow: -1px 2px 18px -6px orange;
+    color: orange !important;
+    border: 1px solid orange;
+  }
+
+  .gheKhachDat {
+    background-color: rgb(242, 25, 191) !important;
+    cursor: no-drop;
+  }
+
+  .bk-description {
+    width: 90%;
+    margin: 2rem auto;
+
+    table {
+      margin: 0 auto;
+    }
+
+    table>thead>tr>th,
+    table>tbody>tr>td {
+      padding: 0 .5rem;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Media screen
+@media screen and (max-width: 1200px) {
+  .bk-booking {
+    width: 90%;
+
+    .bk-area {
+      .ghe-area {
+        width: 100%;
+
+        // gap: .4rem;
+        .ghe {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+
+      .bk-screen {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .bk-booking {
+    width: 90%;
+
+    .bk-area {
+      .area-seats {
+        grid-column: span 12 !important;
+        margin-right: 0 !important;
+
+        .ghe-area {
+          width: 100%;
+
+          gap: .5rem;
+
+          .ghe {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+
+        .bk-screen {
+          width: 100%;
+          border-bottom: 30px solid rgba(172, 163, 163, 0.725);
+
+          h3 {
+            margin: 0 !important;
+          }
+        }
+
+        .bk-description {
+          width: 100%;
+
+          table>thead>tr>th,
+          table>tbody>tr>td {
+            padding: 0 .2rem;
+          }
+
+          table>tbody>tr>td .ghe {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+
+      .area-infor {
+        // grid-column: span 8;
+        grid-column-start: 3;
+        grid-column-end: 11;
+      }
+
+
+    }
+
+    .ant-tabs {
+      .ant-tabs-nav {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            &:not(:first-child) {
+              margin: 0 0 0 1rem;
+            }
+
+            .ant-tabs-tab-btn {
+              font-size: .8rem;
+            }
+
+            .tabPane-home {
+              span {
+                font-size: 1.5rem !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-booking {
+    width: 95%;
+
+    .bk-area {
+      .area-seats {
+        grid-column: span 12 !important;
+
+        .ghe-area {
+          width: 100%;
+
+          gap: .2rem;
+
+          .ghe {
+            width: 1.8rem;
+            height: 1.8rem;
+          }
+        }
+
+        .bg-black {
+          width: 100%;
+          min-width: 32rem;
+          margin: auto;
+        }
+
+        .bk-screen {
+          width: 100%;
+          min-width: 32rem;
+          margin: auto;
+          border-bottom: 30px solid rgba(172, 163, 163, 0.725);
+
+          h3 {
+            margin: 0 !important;
+          }
+        }
+
+        .bk-description {
+          width: 100%;
+
+          table>thead>tr>th,
+          table>tbody>tr>td {
+            padding: 0 .2rem;
+          }
+
+          table>tbody>tr>td .ghe {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+
+        &>div:first-child {
+          overflow: auto;
+        }
+      }
+
+      .area-infor {
+        // grid-column: span 8;
+        grid-column-start: 3;
+        grid-column-end: 11;
+      }
+    }
+
+    .ant-tabs {
+      .ant-tabs-nav {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            &:not(:first-child) {
+              margin: 0 0 0 1rem;
+            }
+
+            .ant-tabs-tab-btn {
+              font-size: .8rem;
+            }
+
+            .tabPane-home {
+              span {
+                font-size: 1.5rem !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .bk-booking {
+    .ant-tabs {
+      .ant-tabs-nav {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            &:not(:first-child) {
+              margin: 0 0 0 1rem;
+            }
+
+            .ant-tabs-tab-btn {
+              font-size: .8rem;
+            }
+
+            .tabPane-home {
+              display: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bk-history {
+    .history-img {
+      display: none;
+    }
+  }
+}

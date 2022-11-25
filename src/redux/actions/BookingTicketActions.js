@@ -47,7 +47,6 @@ export const datVeAction = (danhSachVe) => {
         })
       }
     } catch (error) {
-      console.log(error)
       alert('Không thể đặt vé')
     }
   }
@@ -66,9 +65,9 @@ export const datGheAction = (ghe, maLichChieu) => {
     let danhSachGheDangDat = getState().BookingTicketReducer.danhSachGheDangDat;
     let taiKhoan = getState().UserManageReducer.userLogin.taiKhoan;
     
-    console.log('danhSachGheDangDat', danhSachGheDangDat);
-    console.log('taiKhoan', taiKhoan);
-    console.log('maLichChieu', maLichChieu);
+    // console.log('danhSachGheDangDat', danhSachGheDangDat);
+    // console.log('taiKhoan', taiKhoan);
+    // console.log('maLichChieu', maLichChieu);
     // Convert object to JSON to as argument for calling api signalR
     danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
 

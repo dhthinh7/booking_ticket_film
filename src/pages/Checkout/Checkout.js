@@ -4,7 +4,7 @@ import React, { Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import _ from 'lodash';
 import { useDispatch, useSelector } from "react-redux";
-import './Style.scss';
+import './Checkout.scss';
 import { datGheAction, datVeAction, layDanhSachPhongVeAction } from "../../redux/actions/BookingTicketActions";
 import { CHANGE_TAB_ACTIVE, GET_SEAT_OTHER_USER } from "../../redux/types/Type";
 import { connection } from "../..";
@@ -25,20 +25,20 @@ export default function Checkout(props) {
     dispatch(layDanhSachPhongVeAction(props.match.params.id, true));
   }, [])
 
-  return <div className="m-5 relative">
+  return <div className="bk-booking">
     <Tabs activeKey={tabActive} onChange={(key) => {
       dispatch({
         type: CHANGE_TAB_ACTIVE,
         number: key.toString()
       })
     }}>
-      <TabPane tab={<div className="text-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <TabPane tab={<div className="tabPane-home text-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <NavLink to="/"><HomeOutlined style={{ marginLeft: 10, fontSize: 25 }} /></NavLink></div>} key="3">
       </TabPane>
       <TabPane tab="01 CHỌN GHẾ & THANH TOÁN" key="1" >
         <BookingTicket {...props} chiTietPhongVe={chiTietPhongVe} userLogin={userLogin} danhSachGheDangDat={danhSachGheDangDat} danhSachGheKhachDat={danhSachGheKhachDat} />
       </TabPane>
-      <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
+      <TabPane tab="02 LỊCH SỬ ĐẶT VÉ" key="2">
         <HistoryBooking {...props} />
       </TabPane>
     </Tabs>
@@ -127,15 +127,12 @@ const BookingTicket = (props) => {
         }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
           {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : <CloseOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : classGheKhachDat !== '' ? <SmileOutlined style={{ marginBottom: 7.5, fontWeight: 'bold' }} /> : ghe.stt}
         </button>
-
-        {(index + 1) % 16 === 0 ? <br /> : ''}
-
       </Fragment>
     })
   }
   return <div className="bk-area min-h-screen">
     <div className="grid grid-cols-12">
-      <div className="col-span-9">
+      <div className="area-seats col-span-9">
         <div className="flex flex-col items-center mt-2">
           <div className="bg-black " style={{ width: '85%', height: 15 }}>
           </div>
@@ -143,13 +140,13 @@ const BookingTicket = (props) => {
             <h3 className="mt-2 text-black text-lg">Màn hình</h3>
           </div>
           {/* Seat render */}
-          <div>
+          <div className="ghe-area">
             {renderSeats()}
           </div>
         </div>
         {/* Render seat information note */}
-        <div className="mt-5 flex justify-center">
-          <table className=" divide-y divide-gray-200 w-2/3">
+        <div className="bk-description">
+          <table className="divide-y divide-gray-200">
             <thead className="bg-gray-50 p-5">
               <tr>
                 <th>Ghế chưa đặt</th>
@@ -173,13 +170,13 @@ const BookingTicket = (props) => {
           </table>
         </div>
       </div>
-      <div className="col-span-3">
+      <div className="area-infor col-span-3">
         <h3 className="text-green-400 text-center text-4xl"> {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
           return tongTien += ghe.giaVe;
         }, 0).toLocaleString()} đ</h3>
         <hr />
         <h3 className="text-xl mt-2">{thongTinPhim?.tenPhim}</h3>
-        <p>Địa điểm: {thongTinPhim?.tenCumRap} - {thongTinPhim?.tenRap}</p>
+        <p>Địa điểm: <br/>{thongTinPhim?.tenCumRap} - {thongTinPhim?.tenRap}</p>
         <p>Ngày chiếu: {thongTinPhim?.ngayChieu} - {thongTinPhim?.gioChieu}</p>
         <hr />
         <div className="flex flex-row my-3">
@@ -239,7 +236,7 @@ const HistoryBooking = (props) => {
 
       return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
         <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-          <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={thongTinDatVeItem.hinhAnh} />
+          <img alt="team" className="history-img w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={thongTinDatVeItem.hinhAnh} />
           <div className="flex-grow">
             <h2 className="text-pink-500 title-font font-medium text-2xl">{thongTinDatVeItem.tenPhim}</h2>
             <p className="text-gray-500"><span className="font-bold">Giờ chiếu:</span> {moment(thongTinDatVeItem.ngayDat).format('hh:mm A')} - <span className="font-bold">Ngày chiếu:</span>{moment(thongTinDatVeItem.ngayDat).format('DD-MM-YYYY')} .</p>
@@ -253,7 +250,7 @@ const HistoryBooking = (props) => {
     })
   }
 
-  return <section className="text-gray-600 body-font">
+  return <section className="bk-history text-gray-600 body-font">
   <div className="container px-5 py-3 mx-auto">
     <div className="flex flex-col text-center w-full mb-5">
       <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4  text-purple-600 ">Lịch sử đặt vé khách hàng</h1>

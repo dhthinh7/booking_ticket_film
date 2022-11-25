@@ -7,7 +7,7 @@ export const renderLichChieuTheoPhim = (listLichChieu) => {
     return !Object.keys(result).includes(current.ngayChieuGioChieu.slice(0, 10)) ? { ...result, [current.ngayChieuGioChieu.slice(0, 10)]: [current] } : { ...result, [current.ngayChieuGioChieu.slice(0, 10)]: [...result[current.ngayChieuGioChieu.slice(0, 10)], current] }
   }, {})
 
-  return Object.keys(showTimeArranged).slice(0, 5).map((item, index) => {
+  return Object.keys(showTimeArranged).map((item, index) => {
     let dayOfWeek = moment(item).format("E")
     dayOfWeek = dayOfWeek === '1' ? 'Chủ nhật' : 'Thứ ' + dayOfWeek
     return <div key={index}>

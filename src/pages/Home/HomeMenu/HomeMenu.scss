@@ -141,6 +141,7 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    overflow: hidden;
 
     .bk-tabParent {
       max-height: 600px;
@@ -183,9 +184,11 @@
     }
   }
 
-  .ant-tabs-content-holder {
-    max-height: calc($height-cinema - $height-list-cinema-offset - 20px);
-    overflow: hidden auto;
+  .bk-tabChild {
+    .ant-tabs-content-holder {
+      max-height: calc($height-cinema - $height-list-cinema-offset - 25px);
+      overflow: hidden auto;
+    }
   }
 }
 
@@ -259,6 +262,7 @@
       width: 80%;
 
       .bk-tabParent {
+        max-height: 800px !important;
         &>.ant-tabs-nav {
           &>div {
             justify-content: center;
