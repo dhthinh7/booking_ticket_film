@@ -2,15 +2,15 @@
   .slick-next, .slick-prev {
     // border: solid #d8d8d8;
     border: solid $borderColor;
-    border-width: 0 5px 5px 0;
     font-size: 20px;
     width: 35px;
     height: 35px;
+    top: 50%;
     transition: all .3s;
-
     padding: 3px;
     display: block;
     z-index: 10;
+    transform: rotate(45deg) translate(-50%, -50%);
 
     &:before {
       content: '';
@@ -22,11 +22,11 @@
 
   .slick-next {
     right: $position;
-    transform: rotate(-45deg);
+    border-width: 5px 5px 0 0;
   }
 
   .slick-prev {
     left: $position;
-    transform: rotate(135deg);
+    border-width: 0 0 5px 5px;
   }
 }

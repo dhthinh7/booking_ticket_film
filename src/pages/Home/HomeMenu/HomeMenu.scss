@@ -20,19 +20,25 @@
     }
   }
 
-  @include arrow($arrow-gray, -80px);
+  @include arrow($arrow-gray, -2rem);
 
   .bk-carousel-menu {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+
     .bk-item {
       position: relative;
       width: 95%;
+      margin: auto;
 
       .film-img {
-        padding-top: 147.9%;
         border-radius: 4px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        background-size: cover;
+        height: 350px;
 
         .bk-overload,
         .trailer {
@@ -132,15 +138,25 @@
     border: 1px solid #ebebec;
     max-height: $height-cinema;
     border-radius: 4px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+
+    .bk-tabParent {
+      max-height: 600px;
+    }
 
     .ant-tabs-tab {
       padding-left: 0;
       opacity: 0.5;
       transition: all .5s;
+
       &:hover {
         opacity: 1;
       }
     }
+
     .ant-tabs-tab-active {
       opacity: 1;
     }
@@ -148,6 +164,7 @@
     .ant-tabs-nav {
       max-height: calc($height-cinema - $height-list-cinema-offset);
     }
+
     .bk-cinema-item {
       .bk-cinema-infor {
         .bk-cinema-name {
@@ -166,8 +183,154 @@
       }
     }
   }
-  .ant-tabs-content-holder {
-    max-height: calc($height-cinema - $height-list-cinema-offset - 20px);
-    overflow: hidden auto;
+
+  .bk-tabChild {
+    .ant-tabs-content-holder {
+      max-height: calc($height-cinema - $height-list-cinema-offset - 25px);
+      overflow: hidden auto;
+    }
   }
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+  .bk-home-menu {
+
+    // CarouselFilms
+    .bk-carousel-menu {
+      width: 85% !important;
+
+      .bk-item {
+        .film-img {
+          height: 260px;
+        }
+      }
+
+      .slick-slider {
+        .slick-arrow {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    // CinemaInfor
+    .bk-cinema {
+      width: 85% !important;
+
+      .bk-tabChild {
+        .ant-tabs-nav {
+          width: 50% !important;
+
+          .bk-cinema-item {
+            .bk-cinema-logo {
+              min-width: 2rem;
+            }
+
+            .bk-cinema-infor {
+              max-width: 80%;
+
+              p {
+                white-space: pre-wrap;
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-home-menu {
+
+    // CarouselFilms
+    .bk-carousel-menu {
+      .slick-slider {
+        .slick-arrow {
+          display: none !important;
+        }
+      }
+    }
+
+    // CinemaInfor
+    .bk-cinema {
+      padding: 0 !important;
+      width: 80%;
+
+      .bk-tabParent {
+        max-height: 800px !important;
+        &>.ant-tabs-nav {
+          &>div {
+            justify-content: center;
+
+            .ant-tabs-nav-list {
+              div:not(:last-child) {
+                padding: 0.5rem 0;
+              }
+
+              div:not(:first-child) {
+                margin: 0 0 0 1.5rem;
+              }
+
+              div:last-child {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .bk-tabChild {
+        flex-direction: column;
+
+        .ant-tabs-nav {
+          width: 100% !important;
+
+          .ant-tabs-nav-list {
+            padding: .5rem;
+
+            div:not(:last-child) {
+              padding: 0;
+              margin: .5rem 0 0 0;
+            }
+          }
+
+          .bk-cinema-item {
+            .bk-cinema-logo {
+              min-width: 2rem;
+            }
+
+            .bk-cinema-infor {
+              max-width: 100%;
+
+              p {
+                white-space: pre-wrap;
+              }
+            }
+          }
+        }
+
+        .ant-tabs-content-holder {
+          padding: 1rem;
+          margin: 1rem 0;
+          max-height: 500px;
+
+          .ant-tabs-content {
+            .ant-tabs-tabpane {
+              padding: 0;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+
 }

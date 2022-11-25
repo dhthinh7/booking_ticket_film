@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../..';
 import { userLoginAction } from '../../redux/actions/UserManageAction';
+import './Login.scss';
 
 export default function Login(props) {
 
@@ -20,7 +21,7 @@ export default function Login(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="lg:w-1/2 xl:max-w-screen-sm mx-auto">
+    <form onSubmit={formik.handleSubmit} className="bk-login lg:w-1/2 xl:max-w-screen-sm mx-auto">
       <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
         <h2 className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">Đăng nhập</h2>
         <div className="mt-12">
@@ -35,12 +36,12 @@ export default function Login(props) {
                   Mật khẩu
                 </div>
                 <div>
-                  <a className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer">Quên mật khẩu ?</a>
+                  <div className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer">Quên mật khẩu ?</div>
                 </div>
               </div>
               <input type="password" name="matKhau" onChange={formik.handleChange} className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Nhập vào mật khẩu" />
             </div>
-            <div className="mt-10">
+            <div className="bk-button mt-10">
               <button className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg">
                 Đăng nhập
               </button>

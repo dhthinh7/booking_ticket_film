@@ -1,0 +1,44 @@
+.bk-register {
+  &>div {
+    .bk-button {
+      button {
+        border-radius: .2rem;
+      }
+    }
+  }
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {
+  .bk-register {
+    &>div {
+      min-width: 50%;
+
+      .bk-button {
+        button {
+          margin-top: 1rem !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .bk-register {
+    &>div {
+      min-width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-register {
+    &>div {
+      min-width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  
+}

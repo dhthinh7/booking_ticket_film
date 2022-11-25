@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { regExPhone } from '../../utils/config';
 import { withFormik } from 'formik';
 import { userRegisterAction } from '../../redux/actions/UserManageAction';
+import './Register.scss';
 function Register(props) {
   const {
     errors,
@@ -15,7 +16,7 @@ function Register(props) {
   } = props;
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }} className="container" style={{ height: window.innerHeight }} >
+    <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }} className="bk-register container" style={{ height: window.innerHeight }} >
       <div className="d-flex flex-column justify-content-center align-items-center w-1/4 mx-auto" style={{ height: '100%' }} >
         <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>Create Account</h3>
         <div className="d-flex mt-3 w-full" >
@@ -48,7 +49,7 @@ function Register(props) {
         </div>
         <div className="text-danger text-left">{errors.email}</div>
 
-        <div className="flex justify-between w-full">
+        <div className="bk-button flex justify-between w-full">
           <Button htmlType="submit" size="large" style={{ minWidth: '100%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5 border-0">Signup</Button>
         </div>
         <NavLink to="/login">Back to login <i className="fa fa-long-arrow-alt-left mt-3"></i></NavLink>

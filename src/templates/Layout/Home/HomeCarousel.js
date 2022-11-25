@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import { getListBannersAction } from "../../../redux/actions/FilmMangeAction";
-import './style.scss';
+import './HomeCarousel.scss';
 
 export default function HomeCarousel() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function HomeCarousel() {
     lineHeight: '160px',
     textAlign: 'center',
     backgroundPosition: 'center',
-    backgroundSize: '100%',
+    backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
 
   };
@@ -35,9 +35,7 @@ export default function HomeCarousel() {
   const renderBanner = () => {
     return listBanner?.map((item, index) => {
       return <div key={index}>
-        <div style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})`}} className="mx-1">
-        </div>
-
+        <div style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})`}} className="home-carousel-item mx-1"></div>
       </div>
     })
   }

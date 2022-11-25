@@ -1,14 +1,130 @@
 .bk-header {
-  min-height: 64px;
-
-  ul li {
-    a {
-      transition: all .3s ease-in-out;
+  height: 64px;
+  .bk-content {
+    .bk-center li {
+      a {
+        transition: all .3s ease-in-out;
+      }
+  
+      &:hover a {
+        color: red;
+      }
     }
 
-    &:hover a {
-      color: red;
+    .bk-smallScreen {
+      display: none;
     }
   }
 
+  .bk-modal {
+    display: none;
+  }
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {
+  .bk-header {
+    .bk-content {
+      .bk-center li {
+        a {
+          padding-left: .5rem !important;
+          padding-right: .5rem !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .bk-header {
+    .bk-content {
+      .bk-center {
+        left: 40%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-header {
+    height: 3rem !important;
+    .bk-content {
+      height: 100%;
+      a img {
+        width: 2rem;
+        height: 2rem;
+      }
+      .bk-center, .bk-user {
+        display: none;
+      }
+
+      .bk-smallScreen {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          .bk-smallScreenIcon {
+            svg {
+              color: red;
+            }
+          }
+        }
+
+        .bk-smallScreenIcon {
+          svg {
+            font-size: 1.5rem;
+            color: #000000;
+            transition: color 1s ease-in-out;
+          }
+        }
+      }
+    }
+
+    .bk-modal {
+      position: absolute;
+      display: block;
+      right: -100%;
+      top: 0;
+      width: 12rem;
+      background-color: white;
+      transition: all .5s ease-in-out;
+      ul {
+        margin: 0 !important;
+        li {
+          padding: .5rem .5rem;
+          a, div {
+            font-weight: 700;
+            padding: 0 !important;
+          }
+
+          &:hover {
+            a, div {
+              color: red;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    .showModal {
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .bk-header {
+    .bk-modal {
+      width: 9rem;
+      ul {
+        margin: 0.5rem 0 !important;
+        li {
+          padding: .3rem .6rem;
+        }
+      }
+    }
+  }
 }

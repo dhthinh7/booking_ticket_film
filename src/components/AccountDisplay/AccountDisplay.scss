@@ -1,0 +1,103 @@
+.account-display {
+  .account-content {
+    .account-items {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .account-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        &>div {
+          text-align: center;
+          line-height: 2.3rem;
+        }
+      }
+
+      .account-home {
+        display: none;
+      }
+    }
+  
+    .account-icons {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .account-display {
+    .account-content {
+      .account-items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #EFE8E7;
+        position: absolute;
+        top: 3rem;
+        right: -20rem;
+        width: 15rem;
+        padding: 1rem;
+        transition: all .5s linear;
+        border-radius: .5rem;
+        span {
+          display: none;
+        }
+        .account-user {
+          flex-direction: column;
+          &>div:nth-child(1) {
+            display: none;
+          }
+
+          div {
+            line-height: unset;
+          }
+        }
+
+        .account-logout {
+          transition: all .3s ease-in-out;
+          &:hover {
+            color: red;
+          }
+        }
+
+        .account-item {
+          color: black;
+        }
+
+        .account-home {
+          margin: 1rem 0;
+          transition: all .5s ease-in-out;
+          display: block;
+          a {
+            color: black;
+            font-weight: 500;
+          }
+          &:hover a {
+            color: red;
+          }
+        }
+      }
+
+      .account-items.active {
+        right: -3rem;
+      }
+    
+      .account-icons {
+        display: block;
+        position: absolute;
+        top: .8rem;
+        right: .9rem;
+        transition: color .3s ease;
+        &:hover {
+          color: red;
+          cursor: pointer;
+        }
+        svg {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+}

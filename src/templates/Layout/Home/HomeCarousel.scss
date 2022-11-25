@@ -1,0 +1,81 @@
+@import './../../../style/mixin';
+@import '../../../style/variable';
+
+.bk-home-carousel {
+  .slick-slider {
+    @include arrow($arrow-light, 78px); 
+
+    .slick-dots {
+      & li.slick-active {
+        button::before {
+          width: 25px;
+        }
+      }
+
+      button {
+        &::before {
+          content: '';
+          width: 20px;
+          height: 5px;
+          border-radius: 3px;
+          background-color: red;
+          transition: all .5s;
+        }
+      }
+    }
+  }
+  
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {
+  .bk-home-carousel {
+    .slick-slider {
+      .slick-list {
+        .home-carousel-item {
+          height: 500px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .bk-home-carousel {
+    .slick-slider {
+      .slick-list {
+        .home-carousel-item {
+          height: 400px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-home-carousel {
+    .slick-slider {
+      .slick-next {
+        right: 20px;
+      }
+
+      .slick-prev {
+        left: 20px;
+      }
+      .slick-list {
+        .home-carousel-item {
+          height: 300px !important;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .slick-next, .slick-prev {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
