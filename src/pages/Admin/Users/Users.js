@@ -7,9 +7,10 @@ import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
 import { deleteUserAction, getListTyeOfUserAction, getListUserAction } from '../../../redux/actions/UserManageAction';
 import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, GET_ACCOUNT_USER_DETAIL } from '../../../redux/types/Type';
+import './Users.scss';
 const { Search } = Input;
 
-export default function Films() {
+export default function Users() {
 
   const dispatch = useDispatch();
   let [searchText, setSearchText] = useState('');
@@ -109,21 +110,21 @@ export default function Films() {
   }
 
   return (
-    <div>
-      <h3 className="text-4xl">Quản lý người dùng</h3>
-      <Button className="mb-5" onClick={() => {
+    <div className='bk-users'>
+      <h3 className="bk-users-title text-4xl">Quản lý người dùng</h3>
+      <Button className="bk-button-addUsers mb-5" onClick={() => {
         history.push('/admin/users/addNewUser');
         dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/users/addNewUser'})
       }}>Thêm người dùng</Button>
       <Search
-        className="mb-5"
+        className="bk-users-search mb-5"
         placeholder="Nhập vào tài khoản hoặc họ tên người dùng"
         enterButton={<SearchOutlined />}
         size="large"
         onChange={onSearchChange}
         onSearch={handleSearch}
       />
-      <Table columns={columns} dataSource={dataTable} onChange={onChange} rowKey={'stt'} />
+      <Table className='bk-users-table' columns={columns} dataSource={dataTable} onChange={onChange} rowKey={'stt'} />
     </div>
   )
 }
