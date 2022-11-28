@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInforCinemaAction, getInforGroupOfCinemaAction } from "../../../redux/actions/CinemaAction";
 import moment from 'moment';
 import { taoLichChieuAction } from "../../../redux/actions/BookingTicketActions";
+import './ShowTime.scss';
 
 export default function ShowTime(props) {
   
@@ -66,9 +67,9 @@ export default function ShowTime(props) {
   }
 
   return (
-    <div className="container flex justify-around">
-      <div className="image">
-        <h3 className="text-2xl">Tạo lịch chiếu - {props.match.params.name}</h3>
+    <div className="bk-showtime flex justify-around">
+      <div className="showtime-image">
+        <h3 className="showtime-image--title text-2xl">Tạo lịch chiếu - {props.match.params.name}</h3>
         <img src={film.hinhAnh} alt='...' width={200} height={100}/>
       </div>
       <Form
@@ -77,6 +78,7 @@ export default function ShowTime(props) {
         wrapperCol={{ span: 16 }}
         onSubmitCapture={formik.handleSubmit}
         style={{maxWidth: '50%', flex: '0 0 50%'}}
+        className="showtime-form"
       >
         <Form.Item label="Hệ thống rạp">
           <Select options={convertSelectHTR()} onChange={handleChangeHeThongRap} placeholder="Chọn hệ thống rạp" />

@@ -1,0 +1,21 @@
+// Media screen
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+  .bk-users {
+    .bk-users-table {
+      .ant-table {
+        .ant-table-content {
+          overflow: auto;
+          table thead tr th {
+            padding: .4rem !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {}

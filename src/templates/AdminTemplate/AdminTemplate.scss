@@ -1,0 +1,202 @@
+.bk-adminTemplate {
+  --width-collapsed: 3rem;
+  --width-without-collapsed: 10rem;
+  position: relative;
+  overflow: hidden auto;
+
+  // Logo button
+  .admin-logo-button {
+    display: none;
+  }
+
+  // Sider
+  .bk-sider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    height: 100vh;
+
+    width: var(--width-without-collapsed) !important;
+    min-width: var(--width-without-collapsed) !important;
+    max-width: var(--width-without-collapsed) !important;
+
+    .ant-layout-sider-children {
+      width: 100% !important;
+
+      .admin-logo {
+        img {
+          width: 3rem;
+          margin: 1rem;
+        }
+      }
+
+      ul {
+        li {
+          padding-left: 1rem !important;
+
+          &.ant-menu-submenu {
+            div {
+              padding: 0 !important;
+            }
+          }
+        }
+      }
+    }
+
+    .ant-layout-sider-trigger {
+      width: var(--width-without-collapsed) !important;
+      left: 0;
+    }
+
+    &.ant-layout-sider.ant-layout-sider-collapsed {
+      width: var(--width-collapsed) !important;
+      min-width: var(--width-collapsed) !important;
+      max-width: var(--width-collapsed) !important;
+      justify-content: center;
+
+      .ant-layout-sider-children {
+        .admin-logo {
+          margin: 1rem 0;
+
+          img {
+            width: 2rem;
+            margin: auto;
+          }
+
+        }
+
+        ul {
+          li {
+            .ant-menu-title-content {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .ant-layout-sider-trigger {
+        width: var(--width-collapsed) !important;
+        left: 0;
+      }
+    }
+  }
+
+  // Layout
+  .bk-adminSiteLayout {
+    margin-left: var(--width-collapsed);
+  }
+
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+  .bk-adminTemplate {
+
+    // Layout
+    .bk-adminSiteLayout {
+
+      // Content
+      .bk-admin-main-layout {
+        .site-layout-background {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-adminTemplate {
+    // Logo button
+    .admin-logo-button {
+      position: fixed;
+      top: .2rem;
+      left: 1rem;
+      width: 2.5rem;
+      z-index: 100;
+      display: block;
+    }
+
+    // Sider 
+    .bk-sider {
+      height: 100vh !important;
+      display: block;
+      position: fixed;
+      left: 0;
+      padding-top: 3rem;
+
+      .ant-layout-sider-children {
+        height: 100vh;
+      }
+
+      .ant-layout-sider-trigger {
+        display: none;
+      }
+
+      .admin-logo {
+        display: none;
+      }
+
+      &.ant-layout-sider.ant-layout-sider-collapsed {
+        top: 0;
+        left: -100%;
+      }
+
+    }
+
+    // Side layout
+    .bk-adminSiteLayout {
+      margin-left: 0 !important;
+
+      // Header
+      .ant-layout-header {
+        height: 3rem;
+
+        .bk-layout-header {
+          display: none;
+        }
+
+        .account-display {
+          .account-items {
+            .account-item {
+              width: 100%;
+              line-height: 2.3rem;
+            }
+
+            .account-user {
+              div:nth-child(2) {
+                line-height: 2.3rem;
+              }
+            }
+
+            .account-home {
+              display: none;
+            }
+
+            .account-client-side {
+              display: block;
+              margin: 0;
+            }
+
+            .account-logout {
+              text-align: left;
+            }
+          }
+
+          .account-icons {
+            top: .5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  
+}

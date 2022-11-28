@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import _ from "lodash";
 import { USER_LOGIN } from "../../utils/config";
 import AccountDisplay from "../../components/AccountDisplay/AccountDisplay";
+import './AdminTemplate.scss';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -20,14 +21,14 @@ const AdminTemplate = (props) => { //path, exact, Component
   const { Component, ...restProps } = props;
   const { userLogin } = useSelector(state => state.UserManageReducer);
   const { selectedKeys } = useSelector(state => state.AdminTemplateReducer);
-  let [ stateSelectedKeys, setStateSelectedKeys ] = useState(selectedKeys);
-  const [collapsed, setCollapsed] = useState(false);
+  let [stateSelectedKeys, setStateSelectedKeys] = useState(selectedKeys);
+  const [collapsed, setCollapsed] = useState(true);
 
-  const onCollapse = collapsed => {
-    setCollapsed(collapsed);
+  const onCollapse = () => {
+    setCollapsed(!collapsed);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setStateSelectedKeys(selectedKeys)
   }, [selectedKeys])
 
@@ -47,12 +48,13 @@ const AdminTemplate = (props) => { //path, exact, Component
 
   return <Route {...restProps} render={(propsRoute) => { //props.location,props.history,props.match
     return <Fragment>
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className="logo mt-3 ml-4 w-9">
-            <img className="" src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="logo" />
+      <Layout className="bk-adminTemplate">
+      <img className="admin-logo-button" src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="logo" onClick={onCollapse}/>
+        <Sider className="bk-sider sider-collapsed" collapsible collapsed={collapsed} onCollapse={onCollapse}>
+          <div className="admin-logo">
+            <img src="https://movie-booking-project.vercel.app/img/headTixLogo.png" alt="logo" />
           </div>
-          <Menu theme="dark" selectedKeys={stateSelectedKeys} mode="inline">
+          <Menu className="bk-admin-menu" theme="dark" selectedKeys={stateSelectedKeys} mode="inline">
             <Menu.Item key="/admin/users" icon={<UserOutlined />}>
               <NavLink to="/admin/users" onClick={() => setStateSelectedKeys('/admin/users')}>Users</NavLink>
             </Menu.Item>
@@ -69,14 +71,14 @@ const AdminTemplate = (props) => { //path, exact, Component
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout className="site-layout">
+        <Layout className="bk-adminSiteLayout site-layout">
           <Header className="bg-white" style={{ padding: 0 }} >
             <div className="flex justify-between pr-5">
-            <NavLink to="/" className='ml-5 font-medium hover:text-red-500 duration-300'>Client side</NavLink>
+              <NavLink to="/" className='bk-layout-header ml-5 font-medium hover:text-red-500 duration-300'>Client side</NavLink>
               <AccountDisplay />
             </div>
           </Header>
-          <Content style={{ margin: '0 16px' }}>
+          <Content className="bk-admin-main-layout" style={{ margin: '0 16px' }}>
             <div className="site-layout-background" style={{ padding: 24, minHeight: '50vh' }}>
               <Component {...propsRoute} />
             </div>

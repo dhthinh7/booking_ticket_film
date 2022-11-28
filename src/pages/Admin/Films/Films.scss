@@ -1,0 +1,43 @@
+.bk-adminFilms {
+  .admin-films--title {}
+
+  .admin-button--addFilm {}
+
+  .admin-films--search {}
+
+  .admin-film--table {}
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+  .bk-adminFilms {
+    .admin-films--title {}
+
+    .admin-button--addFilm {}
+
+    .admin-films--search {}
+
+    .admin-film--table {
+      .ant-table {
+        overflow: auto;
+        .ant-table-container {
+          width: 40rem;
+          table {
+            thead tr th {
+              padding: .5rem;
+              .ant-table-column-title, .ant-table-cell {
+  
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {}

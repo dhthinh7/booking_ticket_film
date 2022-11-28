@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../..';
 import { CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE } from '../../../redux/types/Type';
+import './Films.scss';
 const { Search } = Input;
 
 export default function Films() {
@@ -29,7 +30,7 @@ export default function Films() {
             dataIndex: 'maPhim',
             sorter: (a, b) => a.maPhim - b.maPhim,
             sortDirections: ['descend', 'ascend'],
-            width: '15%'
+            width: '15%',
         },
         {
             key: 'hinhAnh',
@@ -37,7 +38,7 @@ export default function Films() {
             dataIndex: 'hinhAnh',
             render: (text, film, index) => {
                 return <Fragment>
-                    <img src={film.hinhAnh} alt={film.tenPhim} width={50} height={50}/>
+                    <img src={film.hinhAnh} alt={film.tenPhim} style={{width: '3rem', height: '3rem', margin: '0 auto'}}/>
                 </Fragment>
             },
             width: '15%'
@@ -113,21 +114,21 @@ export default function Films() {
     }
 
     return (
-        <div>
-            <h3 className="text-4xl">Quản lý Phim</h3>
-            <Button className="mb-5" onClick={() => {
+        <div className='bk-adminFilms'>
+            <h3 className="admin-films--title text-4xl">Quản lý Phim</h3>
+            <Button className="admin-button--addFilm mb-5" onClick={() => {
                 history.push('/admin/films/addnew');
                 dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films/addnew'})
             }}>Thêm phim</Button>
             <Search
-                className="mb-5"
+                className="admin-films--search mb-5"
                 placeholder="input search text"
                 enterButton={<SearchOutlined />}
                 size="large"
                 onChange={onSearchChange}
                 onSearch={handleSearch}
             />
-            <Table columns={columns} dataSource={dataTable} onChange={onChange} rowKey={'maPhim'} />
+            <Table className='admin-film--table' columns={columns} dataSource={dataTable} onChange={onChange} rowKey={'maPhim'} />
         </div>
     )
 }

@@ -84,6 +84,23 @@
       padding: 0 .5rem;
     }
   }
+
+  .bk-checkout-account {
+    .checkout-account-home {
+      display: none;
+    }
+    .checkout-account-home.not-singed {
+      width: fit-content;
+      margin-left: auto;
+      display: block;
+      margin-top: .5rem;
+      font-weight: 500;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -271,6 +288,12 @@
       }
     }
   }
+
+  // .bk-checkout-account {
+  //   .checkout-account-home.not-singed {
+  //     display: none !important;
+  //   }
+  // }
 }
 
 @media screen and (max-width: 576px) {

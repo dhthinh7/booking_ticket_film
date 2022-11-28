@@ -39,10 +39,11 @@ export default function Checkout(props) {
         <BookingTicket {...props} chiTietPhongVe={chiTietPhongVe} userLogin={userLogin} danhSachGheDangDat={danhSachGheDangDat} danhSachGheKhachDat={danhSachGheKhachDat} />
       </TabPane>
       <TabPane tab="02 LỊCH SỬ ĐẶT VÉ" key="2">
-        <HistoryBooking {...props} />
+        <HistoryBooking {...props}  userLogin = {userLogin}/>
       </TabPane>
     </Tabs>
-    <div className="absolute right-0 top-0">
+    <div className="bk-checkout-account absolute right-0 top-0 w-full">
+      <NavLink className={`${!userLogin.taiKhoan ? 'not-singed' : ''} checkout-account-home`} to='/'>Home</NavLink>
       <AccountDisplay />
     </div>
   </div>
@@ -223,6 +224,7 @@ const BookingTicket = (props) => {
 }
 
 const HistoryBooking = (props) => {
+  console.log("props", props)
   let { accountInformation } = useSelector(state => state.UserManageReducer);
   
   const dispatch = useDispatch();
@@ -254,7 +256,7 @@ const HistoryBooking = (props) => {
   <div className="container px-5 py-3 mx-auto">
     <div className="flex flex-col text-center w-full mb-5">
       <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4  text-purple-600 ">Lịch sử đặt vé khách hàng</h1>
-      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Hãy xem thông tin địa và thời gian để xem phim vui vẻ bạn nhé !</p>
+      {!props.userLogin.taiKhoan ? <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Hãy đăng nhập để xem lịch sử đặt vé bạn nhé</p> : ''}
     </div>
     <div className="flex flex-wrap -m-2">
       {renderTicketItem()}

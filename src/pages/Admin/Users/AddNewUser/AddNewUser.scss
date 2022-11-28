@@ -1,0 +1,75 @@
+.bk-userAdd {
+  .bk-userAdd--title {
+  }
+  .bk-form-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 70%;
+    margin: 0 auto;
+    max-width: 50rem;
+
+    .item-right, .item-left {
+      min-width: 300px;
+    }
+
+    .bk-addBtn {
+      margin-top: 1.2rem;
+    }
+  }
+}
+
+// Media screen
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 992px) {
+  .bk-userAdd {
+    .bk-userAdd-form {
+      .bk-form-content {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bk-userAdd {
+    .bk-userAdd-form {
+      .bk-form-content {
+        width: 90%;
+        gap: 1rem;
+        
+        .item-right, .item-left {
+          flex: 0 0 50%;
+          min-width: 0 !important;
+        }
+
+        .bk-addBtn {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .bk-userAdd {
+    .bk-userAdd--title {
+      font-size: 1.3rem;
+      line-height: 2rem;
+    }
+    .bk-userAdd-form {
+      .bk-form-content {
+        width: 90%;
+        flex-wrap: wrap;
+        gap: 0;
+
+        .item-right, .item-left {
+          flex: 0 0 100%;
+        }
+      }
+    }
+  }
+}

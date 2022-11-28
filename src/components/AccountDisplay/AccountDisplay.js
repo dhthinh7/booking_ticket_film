@@ -8,9 +8,11 @@ import { FaBars } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 
 export default function AccountDisplay() {
+
   let { userLogin } = useSelector(state => state.UserManageReducer);
   let [active, setActive] = useState('');
-  
+  let [checkIsAdmin, setcheckIsAdmin] = useState(history.location.pathname);
+
   const handleIsActive = () => {
     active === '' ? setActive('active') : setActive('');
   }
@@ -26,7 +28,10 @@ export default function AccountDisplay() {
             <div className="font-medium text-green-500">Hello ! {userLogin.taiKhoan}</div>
           </div>
           <span className="mx-2">|</span>
-          <div className="account-item account-home"><NavLink to="/">Home</NavLink></div>
+          {checkIsAdmin.includes('admin') ?
+            <div className="account-item account-client-side"><NavLink to="/">Client-side</NavLink></div> :
+            <div className="account-item account-home"><NavLink to="/">Home</NavLink></div>
+          }
           <button onClick={() => {
             localStorage.removeItem(USER_LOGIN);
             localStorage.removeItem(TOKEN);
