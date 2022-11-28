@@ -1,0 +1,35 @@
+ // Media screen
+ @media screen and (max-width: 768px) {
+   .bk-showtime {
+     flex-wrap: wrap;
+     width: 85%;
+     margin: auto;
+     gap: 2rem;
+     .showtime-image {
+       margin-top: 1rem;
+       img {
+         width: 100%;
+         margin-top: 2rem !important;
+       }
+     }
+
+     .showtime-form {
+       flex: 0 0 100% !important;
+       max-width: 100% !important;
+       .ant-form-item
+       {
+         margin-bottom: 1rem !important;
+         &>div>div {
+          text-align: left;
+         }
+
+         .ant-form-item-control {
+           .ant-input-number-in-form-item {
+             width: 100%;
+           }
+         }
+       }
+     }
+   }
+
+ }
