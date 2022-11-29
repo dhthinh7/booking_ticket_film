@@ -131,7 +131,7 @@ const Edit = (props) => {
           <Input name="moTa" onChange={formik.handleChange} value={formik.values.moTa} />
         </Item>
         <Item label="Ngày khởi chiếu">
-          <DatePicker onChange={handleChangeDatePicker} format="DD/MM/YYYY" value={moment(formik.values.ngayKhoiChieu)} />
+          <DatePicker onChange={handleChangeDatePicker} format="DD/MM/YYYY" value={moment(formik.values.ngayKhoiChieu)} allowClear={false}/>
         </Item>
         <Item label="Đang chiếu">
           <Switch name="dangChieu" onChange={handleChangeSwitch('dangChieu')} checked={formik.values.dangChieu} />

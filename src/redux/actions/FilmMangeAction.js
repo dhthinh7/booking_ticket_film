@@ -69,10 +69,11 @@ export const editUpdatedAction = (formData) => {
     dispatch({ type: SHOW_LOADING })
     try {
       await filmManageService.editUpdated(formData);
+      Notification('success', 'Cập nhật phim thành công');
       history.push('/admin/films');
       dispatch({type: CHANGE_TAB_ACTIVE_ADMIN_TEMPLATE, selectedKeys: '/admin/films'});
     } catch (error) {
-
+      Notification('error', 'Cập nhật phim không thành công', error.response.data.content);
     }
 
     setTimeout(() => {
