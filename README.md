@@ -1,5 +1,5 @@
 # Live server 
-[Click here to see detail](https://bookingticketfilm.netlify.app/)
+[Click here to see detail](https://moviesbookingonline.netlify.app/)
 
 # Getting Started with Create React App
 
